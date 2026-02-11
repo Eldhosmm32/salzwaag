@@ -3,7 +3,7 @@
 import Navbar from "@/components/Navbar";
 import NavbarMobile from "@/components/Navbar-Mobile";
 import { Button } from "@/components/ui/button";
-import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/main-carousel";
+// import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/main-carousel";
 import Autoplay from "embla-carousel-autoplay";
 import Image from "next/image";
 import React from "react";
