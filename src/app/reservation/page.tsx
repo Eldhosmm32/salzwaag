@@ -6,29 +6,26 @@ import ReservationPage from "./[restoId]";
 const RestaurantItems = [
     {
         id: 0,
-        image: '/images/food-1.jpg',
+        image: '/images/rest-1.jpg',
         title: "Restaurant Stäfa",
         location: "Stäfa, Switzerland",
         baseColor: "purple-500"
     },
     {
         id: 1,
-        image: '/images/food-2.jpg',
+        image: '/images/rest-2.jpg',
         title: "Badi Uetikon am See",
         location: "Uetikon am See, Switzerland",
         baseColor: "rose-100"
     },
     {
         id: 2,
-        image: '/images/food-3.jpg',
+        image: '/images/rest-3.jpg',
         title: "Bistro Schiffsteg Stäfa",
         location: "Stäfa, Switzerland",
         baseColor: "amber-100"
     },
 ];
-
-
-
 
 const Reservation = () => (
     <div className="flex flex-col items-center h-screen relative overflow-hidden main-bg">

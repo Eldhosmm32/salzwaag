@@ -6,19 +6,19 @@ import Link from "next/link";
 
 const RestaurantItems = [
     {
-        image: '/images/food-1.jpg',
+        image: '/images/rest-1.jpg',
         title: "Restaurant Stäfa",
         location: "Stäfa, Switzerland",
         baseColor: "purple-500"
     },
     {
-        image: '/images/food-2.jpg',
+        image: '/images/rest-2.jpg',
         title: "Badi Uetikon am See",
         location: "Uetikon am See, Switzerland",
         baseColor: "rose-100"
     },
     {
-        image: '/images/food-3.jpg',
+        image: '/images/rest-3.jpg',
         title: "Bistro Schiffsteg Stäfa",
         location: "Stäfa, Switzerland",
         baseColor: "amber-100"
@@ -220,7 +220,7 @@ const ReservationPage = ({ restoId }: { restoId: number }) => {
                             </CarouselContent>
                         </Carousel>
                         <Button className="border border-orange-400 w-full" variant="outline">
-                            <Link href={`/menu?restoId=${restoId}`}> View All</Link>
+                            <Link href={`./menu?restoId=${restoId}`}> View All</Link>
                         </Button>
                     </div>
                 </div>
