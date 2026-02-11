@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Lora, Rubik } from "next/font/google";
+import { Lora, Poppins } from "next/font/google";
 import "./globals.css";
 
 const lora = Lora({
@@ -7,8 +7,9 @@ const lora = Lora({
   subsets: ["latin"],
 });
 
-const rubik = Rubik({
-  variable: "--font-rubik",
+const poppins = Poppins({
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  variable: "--font-poppins",
   subsets: ["latin"],
 });
 
@@ -25,7 +26,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${lora.variable} ${rubik.variable} antialiased`}
+        className={`${lora.variable} ${poppins.variable} antialiased`}
       >
         {children}
       </body>

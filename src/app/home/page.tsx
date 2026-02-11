@@ -1,23 +1,25 @@
 "use client"
 
 import Navbar from "@/components/Navbar";
+import NavbarMobile from "@/components/Navbar-Mobile";
 import { Button } from "@/components/ui/button";
-import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
+import { MainCarousel, CarouselContent, CarouselItem } from "@/components/ui/main-carousel";
 import Autoplay from "embla-carousel-autoplay";
 import Image from "next/image";
 import React from "react";
+import Link from "next/link";
 
 const CarouselItems = [
     {
-        image: '/images/food-1.jpg',
+        image: '/images/chef.jpg',
         title: "Restaurant Stäfa"
     },
     {
-        image: '/images/food-2.jpg',
+        image: '/images/chef-2.jpg',
         title: "Badi Uetikon am See"
     },
     {
-        image: '/images/food-3.jpg',
+        image: '/images/chef-3.jpg',
         title: "Bistro Schiffsteg Stäfa"
     },
 ];
@@ -25,94 +27,62 @@ const CarouselItems = [
 const HomePage = () => {
     return (
         <>
-            <Navbar />
+            <div className="hidden lg:block" >
+                < Navbar />
+            </div>
+            {/* <div className="block lg:hidden" >
+                < NavbarMobile />
+            </div> */}
+            <div className="flex flex-col items-center h-screen relative overflow-hidden">
+                <div className="w-full h-screen max-w-4xl mx-auto z-10 ">
+                    <MainCarousel
+                        opts={{
+                            align: 'start',
+                            containScroll: 'trimSnaps',
+                            dragFree: false,
+                            loop: true,
+                            duration: 45,
+                        }}
+                        plugins={[Autoplay({ delay: 4000, })]}
+                        className="bg-black/20 overflow-hidden"
+                    >
+                        <CarouselContent className="ml-0 ">
+                            {CarouselItems.map((item, index) => (
+                                <CarouselItem key={index} className="basis-full pl-0 ">
+                                    <div className="relative h-screen ">
+                                        <Image src={item.image} alt="Carousel" fill className="object-cover" sizes="100vw" />
+                                    </div>
+                                </CarouselItem>
+                            ))}
+                        </CarouselContent>
+                    </MainCarousel>
+                </div>
+                <div className="p-4 absolute bottom-20 left-0 w-full z-10 overflow-hidden">
 
-            <div className="flex flex-col h-screen text-black bg-orange-300 relative overflow-hidden">
+                    <div className="bg-white/20 backdrop-blur-sm p-8 rounded-md flex flex-col items-center gap-4 ">
+                        <h2 className="text-black text-2xl font-bold">Welcome to</h2>
 
-
-
-                {/* <div className=" absolute h-screen w-full bg-black/40 backdrop-blur-xs"></div> */}
-                <div className="w-full  h-screen flex ">
-                    <div className="max-w-220 mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center gap-5 p-8 rounded-2xl z-10">
-                        {/* <h2 className="font-(family-name:--font-rubik) text-xl font-light text-white z-10">Welcome to cuisine world of</h2>
                         <Image
-                            src={'/wzs-logo-w.png'}
+                            src={'/wzs-logo.png'}
                             alt="Logo"
-                            width={400}
-                            height={400}
-                            className="z-10"
-                        /> */}
-
-                        <video
-                            src={'/videos/intro.mp4'}
-                            autoPlay
-                            loop
-                            muted
-                            playsInline
-                            className="object-cover z-0 absolute top-0 left-0"
+                            width={200}
+                            height={200}
+                            className="object-contain z-10"
                         />
 
-                        <div className="absolute bottom-0 top-35 w-full h-screen max-w-4xl mx-auto z-10 ">
-                            <Carousel
-                                opts={{
-                                    align: 'start',
-                                    containScroll: 'trimSnaps',
-                                    dragFree: false,
-                                    loop: true,
-                                    duration: 45,
-                                }}
-                                plugins={[Autoplay({ delay: 5000,  })]}
-                                className="bg-black/20 backdrop-blur-sm rounded-sm overflow-hidden"
-                            >
-                                <CarouselContent className="ml-0 ">
-                                    {CarouselItems.map((item, index) => (
-                                        <CarouselItem key={index} className="basis-full pl-0 ">
-                                            <div className="flex gap-2 p-2 font-(family-name:--font-rubik) ">
-                                                <div className="w-1/2  items-center justify-center flex flex-col gap-4 p-4">
-                                                    <h2 className="text-4xl text-white font-bold">{item.title}</h2>
-                                                    <h3 className="text-sm text-white font-normal">Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat veniam cupiditate beatae amet ducimus veritatis delectus magnam voluptates exercitationem totam? Quaerat sint iure dolor pariatur quasi architecto aliquid, temporibus voluptates.</h3>
-
-                                                    <div className="flex gap-2 items-center justify-center">
-                                                        <div className="salz-btn-white w-35 text-center">Reservationen</div>
-                                                        <div className="salz-btn-white w-35 text-center">Menu</div>
-                                                    </div>
-
-                                                </div>
-                                                <div className="w-1/2 h-100 relative">
-                                                    <Image src={item.image} alt="Carousel" fill className="object-cover rounded-sm" sizes="100vw" />
-                                                </div>
-                                            </div>
-
-                                        </CarouselItem>
-                                    ))}
-                                </CarouselContent>
-                            </Carousel>
+                        <div className="flex gap-2 mt-4">
+                            <Button className="salz-btn" asChild>
+                                <Link href="/reservation">Reservationen</Link>
+                            </Button>
+                            <Button className="salz-btn" asChild>
+                                <Link href="/menu">Menu</Link>
+                            </Button>
                         </div>
+
                     </div>
+
                 </div>
             </div >
-
-
-            <div className="h-screen w-full flex gap-5">
-                <h2></h2>
-
-                <div className="w-1/2">
-                    <Image src="/images/food-1.jpg" alt="Food" width={500} height={500} />
-                </div>
-                <div className="w-1/2">
-                    <Image src="/images/food-2.jpg" alt="Food" width={500} height={500} />
-                </div>
-            </div>
-
-            <div className="h-screen w-full flex gap-5">
-                <div className="w-1/2">
-                    <Image src="/images/food-1.jpg" alt="Food" width={500} height={500} />
-                </div>
-                <div className="w-1/2">
-                    <Image src="/images/food-2.jpg" alt="Food" width={500} height={500} />
-                </div>
-            </div>
-
         </>
     );
 };
