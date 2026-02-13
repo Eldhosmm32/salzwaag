@@ -122,7 +122,7 @@ const MainCarousel = React.forwardRef<
 );
 MainCarousel.displayName = 'MainCarousel';
 
-const CarouselContent = React.forwardRef<
+const MainCarouselContent = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => {
@@ -142,9 +142,9 @@ const CarouselContent = React.forwardRef<
     </div>
   );
 });
-CarouselContent.displayName = 'CarouselContent';
+MainCarouselContent.displayName = 'MainCarouselContent';
 
-const CarouselItem = React.forwardRef<
+const MainCarouselItem = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => {
@@ -164,12 +164,12 @@ const CarouselItem = React.forwardRef<
     />
   );
 });
-CarouselItem.displayName = 'CarouselItem';
+MainCarouselItem.displayName = 'MainCarouselItem';
 
 export {
   type CarouselApi,
   MainCarousel,
-  CarouselContent,
-  CarouselItem,
+  MainCarouselContent,
+  MainCarouselItem,
   useCarousel,
 };

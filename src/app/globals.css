@@ -189,3 +189,29 @@ body {
 .salz-shadow {
   box-shadow: 0px 0px 14px 5px #ebdddd;
 }
+
+
+.arrow-section {
+  opacity: 0;
+  scale: 0;
+  transition: all 0.3s ease;
+}
+
+.carousel-text-section {
+  backdrop-filter: blur(var(--blur-xs));
+  transition: all 0.3s ease;
+}
+
+.resto-carousel-section {
+  &:hover {
+    cursor: pointer;
+    .arrow-section {
+      opacity: 1;
+      scale: 1;
+    }
+
+    .carousel-text-section {
+      backdrop-filter: blur(var(--blur-sm));
+    }
+  }
+}
