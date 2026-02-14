@@ -1,7 +1,7 @@
 "use client"
 
-import Navbar from "@/components/Navbar";
-import NavbarMobile from "@/components/Navbar-Mobile";
+import Navbar from "@/components/Navbar-old";
+import NavbarMobile from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
 // import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/main-carousel";
 import Autoplay from "embla-carousel-autoplay";

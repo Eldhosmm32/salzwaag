@@ -1,7 +1,7 @@
 "use client"
 
 import Navbar from "@/components/Navbar";
-import NavbarMobile from "@/components/Navbar-Mobile";
+import NavbarMobile from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
 import { MainCarousel, MainCarouselContent, MainCarouselItem } from "@/components/ui/main-carousel";
 import Autoplay from "embla-carousel-autoplay";
@@ -13,21 +13,90 @@ import { Card, CardContent } from "@/components/ui/card";
 
 const CarouselItems = [
     {
+        id: 0,
         image: '/images/rest-1.jpg',
         title: "Restaurant Stäfa",
         location: "Stäfa"
     },
     {
+        id: 1,
         image: '/images/rest-2.jpg',
         title: "Badi Uetikon am See",
         location: "Uetikon am See"
     },
     {
+        id: 2,
         image: '/images/rest-3.jpg',
         title: "Bistro Schiffsteg Stäfa",
         location: "Stäfa"
     },
 
+];
+
+const MenuItems = [
+    {
+        id: 1,
+        restaurantId: 0,
+        image: '/images/food-1.jpg',
+        title: "Asia-Platte",
+        price: "CHF 17.30"
+    },
+    {
+        id: 2,
+        restaurantId: 0,
+        image: '/images/food-2.jpg',
+        title: "Blattsalat an Honig-Senf-Sauce mit grillierter Ente",
+        price: "CHF 20.30"
+    },
+    {
+        id: 3,
+        restaurantId: 0,
+        image: '/images/food-3.jpg',
+        title: "Grüner Blattsalat",
+        price: "CHF 14.30"
+    },
+    {
+        id: 4,
+        restaurantId: 1,
+        image: '/images/food-4.jpg',
+        title: "Mixed olives",
+        price: "CHF 5.50"
+    },
+    {
+        id: 5,
+        restaurantId: 1,
+        image: '/images/food-5.jpg',
+        title: "Parmesan cheese, piece ",
+        price: "CHF 5.50"
+    },
+    {
+        id: 6,
+        restaurantId: 1,
+        image: '/images/food-6.jpg',
+        title: "Sandwiches of your choice ",
+        price: "CHF 7.00"
+    },
+    {
+        id: 7,
+        restaurantId: 2,
+        image: '/images/food-3.jpg',
+        title: "Half a chicken with salad",
+        price: "CHF 12.30"
+    },
+    {
+        id: 8,
+        restaurantId: 2,
+        image: '/images/food-6.jpg',
+        title: "Half a chicken with salad and fries",
+        price: "CHF 3.30"
+    },
+    {
+        id: 9,
+        restaurantId: 2,
+        image: '/images/food-2.jpg',
+        title: "Dockside salad with grilled duck",
+        price: "CHF 24.30"
+    }
 ];
 
 const HomePage = () => {
@@ -41,7 +110,7 @@ const HomePage = () => {
             <div className="hidden md:block h-screen w-full bg-black relative" >
 
                 <div className="fixed top-0 left-0 w-full z-50">
-                    <NavbarMobile />
+                    <Navbar />
                 </div>
 
                 <div className="w-full flex flex-col items-center justify-center h-screen z-10 relative">
@@ -74,24 +143,26 @@ const HomePage = () => {
                             <CarouselContent>
                                 {CarouselItems.map((item, index) => (
                                     <CarouselItem key={index} className="basis-1/2 lg:basis-1/3 resto-carousel-section">
-                                        <div className="relative h-75 rounded-2xl overflow-hidden  ">
-                                            <Image src={item.image} alt="Food" fill className="object-cover" sizes="100vw" />
+                                        <Link href={`/resto?restoId=${index}`}>
+                                            <div className="relative h-75 rounded-2xl overflow-hidden  ">
+                                                <Image src={item.image} alt="Food" fill className="object-cover" sizes="100vw" />
+                                                <div className="absolute bottom-0 left-0 w-full h-auto p-2">
+                                                    <div className="bg-black/15 carousel-text-section rounded-2xl px-4 py-2">
+                                                        <h3 className="text-white text-2xl font-bold">{item.title}</h3>
+                                                        <h5 className="text-white text-md font-normal">{item.location}</h5>
+                                                    </div>
+                                                </div>
 
-                                            <div className="absolute bottom-0 left-0 w-full h-auto p-2">
-                                                <div className="bg-black/15 carousel-text-section rounded-2xl px-4 py-2">
-                                                    <h3 className="text-white text-2xl font-bold">{item.title}</h3>
-                                                    <h5 className="text-white text-md font-normal">{item.location}</h5>
+                                                <div className="arrow-section absolute right-2 top-2 w-10 h-10 p-2 rounded-full bg-black/15 backdrop-blur-xs flex align-center justify-center">
+
+                                                    <Image src={'/icons/arrow-right.svg'} alt="Food" width={18} height={18} sizes="100vw" />
+                                                </div>
+
+                                                <div className="carousel-text-section absolute left-2 top-2 w-fit h-fit text-sm p-2 rounded-3xl bg-black/25 ">
+                                                    Open Now
                                                 </div>
                                             </div>
-
-                                            <div className="arrow-section absolute right-2 top-2 w-10 h-10 p-2 rounded-full bg-black/15 backdrop-blur-xs flex align-center justify-center">
-                                                <Image src={'/icons/arrow-right.svg'} alt="Food" width={18} height={18} sizes="100vw" />
-                                            </div>
-
-                                            <div className="carousel-text-section absolute left-2 top-2 w-fit h-fit text-sm p-2 rounded-3xl bg-black/25 ">
-                                                Open Now
-                                            </div>
-                                        </div>
+                                        </Link>
                                     </CarouselItem>
                                 ))}
                             </CarouselContent>
@@ -143,12 +214,39 @@ const HomePage = () => {
                     </div>
                 </div>
 
-                {/* Contacts */}
+                {/* Specials */}
 
-                <div className="w-full flex gap-4 flex-col  z-10 relative p-5">
+                <div className="w-full flex flex-col min-h-screen z-10">
+                    <div className="w-6xl mx-auto p-3 py-5">
+                        <h1 className="text-5xl font-bold text-(--salz-color) py-5">Our Specials</h1>
+                        <div className="grid grid-cols-3 gap-2">
+                            {MenuItems.map((item, index) => (
+                                <div key={index} className={`p-2 cursor-pointer bg-white border-3 h-70 border-gray-200 rounded-md overflow-hidden gap-2 flex w-full relative hover:border-(--salz-color)/80 hover:scale-102 transition-all duration-300 group`}>
+                                    <Image src={item.image} alt="Reservation" fill className="object-cover brightness-90 group-hover:brightness-100 transition-all duration-300" sizes="100vw" />
+                                    <div className="w-full pt-2 overflow-hidden text-black flex flex-col gap-1 absolute bottom-0 left-0 p-2 bg-white/30 group-hover:bg-white/80 transition-all duration-300 backdrop-blur-xs">
+                                        <h3 className="text-lg font-semibold whitespace-nowrap text-ellipsis overflow-hidden ">{item.title}</h3>
 
-                    <div className="w-6xl mx-auto p-3 py-5 bg-white rounded-md z-10 shadow-2xl">
-                        <h1 className="text-3xl font-bold text-(--salz-color)">Contact Us</h1>
+                                        <div className="flex gap-0.5">
+                                            <h4 className="text-md text-normal whitespace-nowrap text-ellipsis overflow-hidden ">available At: {CarouselItems[item.restaurantId].title}</h4>
+                                        </div>
+                                    </div>
+
+                                    <div className="absolute top-2 right-2 p-2 bg-white/50 group-hover:bg-white transition-all duration-300 text-(--salz-color) font-bold backdrop-blur-xs rounded-md">
+                                        <h4 className="text-sm text-normal whitespace-nowrap text-ellipsis overflow-hidden ">{item.price}</h4>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+
+
+                {/* About Us */}
+
+                <div className="w-full flex gap-4 flex-col  z-10 relative p-5 footer-bg">
+
+                    <div className="w-6xl mx-auto p-3 py-5 bg-white rounded-md z-10 ">
+                        <h1 className="text-3xl font-bold text-(--salz-color)">About Us</h1>
                         <h1 className="text-md font-normal text-black italic">Culinary delights at three locations</h1>
 
                         <div className="flex gap-4 p-2 pt-5">
@@ -221,7 +319,6 @@ const HomePage = () => {
                             </div>
                         </footer>
                     </div>
-
 
                 </div>
 

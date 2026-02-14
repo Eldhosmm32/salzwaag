@@ -34,63 +34,63 @@ const MenuItems = [
         restaurantId: 0,
         image: '/images/food-1.jpg',
         title: "Asia-Platte",
-        time: "17.30"
+        price: "17.30"
     },
     {
         id: 2,
         restaurantId: 0,
         image: '/images/food-2.jpg',
         title: "Blattsalat an Honig-Senf-Sauce mit grillierter Ente",
-        time: "20.30"
+        price: "20.30"
     },
     {
         id: 3,
         restaurantId: 0,
         image: '/images/food-3.jpg',
         title: "Grüner Blattsalat",
-        time: "14.30"
+        price: "14.30"
     },
     {
         id: 4,
         restaurantId: 1,
         image: '/images/food-4.jpg',
         title: "Mixed olives CHF 5.50",
-        time: "09.30"
+        price: "09.30"
     },
     {
         id: 5,
         restaurantId: 1,
         image: '/images/food-5.jpg',
         title: "Parmesan cheese, piece CHF 5.50",
-        time: "11.30"
+        price: "11.30"
     },
     {
         id: 6,
         restaurantId: 1,
         image: '/images/food-6.jpg',
         title: "Sandwiches of your choice CHF 7.00",
-        time: "10.30"
+        price: "10.30"
     },
     {
         id: 7,
         restaurantId: 2,
         image: '/images/food-3.jpg',
         title: "Half a chicken with salad",
-        time: "12.30"
+        price: "12.30"
     },
     {
         id: 8,
         restaurantId: 2,
         image: '/images/food-6.jpg',
         title: "Half a chicken with salad and fries",
-        time: "3.30"
+        price: "3.30"
     },
     {
         id: 9,
         restaurantId: 2,
         image: '/images/food-2.jpg',
         title: "Dockside salad with grilled duck",
-        time: "24.30"
+        price: "24.30"
     }
 ];
 
@@ -126,8 +126,8 @@ const MenuPageContent = () => {
                             <h3 className="text-sm font-semibold whitespace-nowrap text-ellipsis overflow-hidden ">{item.title}</h3>
 
                             <div className="flex gap-0.5">
-                                <Image src={'/icons/clock.png'} alt="Reservation" className="" width={20} height={20} />
-                                <h4 className="text-sm text-normal whitespace-nowrap text-ellipsis overflow-hidden ">{item.time}</h4>
+                                {/* <Image src={'/icons/clock.png'} alt="Reservation" className="" width={20} height={20} /> */}
+                                <h4 className="text-sm text-normal whitespace-nowrap text-ellipsis overflow-hidden ">{item.price}</h4>
                             </div>
                         </div>
                     </div>
