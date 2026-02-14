@@ -151,51 +151,51 @@ const OpeningHours = {
 
 const menuDataBadi: MenuData = [
     {
-        section: "Cold dishes",
+        section: "Kalte Speisen",
         items: [
-            { name: "Mixed olives", price: "CHF 5.50", description: "A selection of exquisite olives with Mediterranean flavors" },
-            { name: "Parmesan cheese, piece", price: "CHF 5.50", description: "finely aged Parmesan with a nutty flavor" },
-            { name: "Sandwiches of your choice", price: "CHF 7.00", description: "Topped with your favorite ingredients - a treat for every taste" },
-            { name: "Sausage salad, garnished", price: "CHF 13.00", description: "Lovingly garnished - perfect for a light snack" },
-            { name: "Sausage and cheese salad, garnished", price: "CHF 14.50", description: "Lovingly garnished - perfect for a bigger appetite" },
-            { name: "Caesar salad", priceVariants: { small: "CHF 15.00", large: "CHF 22.00" }, description: "Simply delicious with roasted chicken breast" },
-            { name: "Salad of the day", price: "CHF 9.50", description: "colorful mix of seasonal ingredients" },
-            { name: "Leaf salad", price: "CHF 9.00", description: "crisp leaf salad with a delicate dressing" },
-            { name: "Mixed salad", price: "CHF 11.00", description: "harmonious combination, fresh and crisp" },
-            { name: "Leaf salad of your choice", price: "CHF 16.50", description: "with spring rolls, samosas, sesame sticks or pan-fried shrimp served with sweet chili sauce" },
-            { name: "Potato salad", price: "CHF 8.00", description: "hearty and delicious" },
-            { name: "Boiled meat salad", priceVariants: { small: "CHF 14.50", large: "CHF 21.50" }, description: "It lasts as long as it lasts" },
-            { name: "Tuna salad (plain)", price: "CHF 13.00", description: "perfect for a small appetite" },
-            { name: "Tuna salad, garnished", price: "CHF 15.50", description: "Lovingly garnished - perfect for a light snack" }
+            { name: "Gemischte Oliven", price: "CHF 5.50", description: "Eine Auswahl erlesener Oliven mit mediteranen Aromen" },
+            { name: "Parmesan Stk.", price: "CHF 5.50", description: "fein gereifter Parmesan nussig im Geschmack" },
+            { name: "Sandwiches nach Wahl", price: "CHF 7.00", description: "belegt mit den Lieblingszutaten - ein Genuss für jeden Geschmack" },
+            { name: "Wurstsalat garniert", price: "CHF 13.00", description: "liebevoll garniert - perfekt für den kleinen Hunger" },
+            { name: "Wurst-Käsesalat garniert", price: "CHF 14.50", description: "liebevoll garniert - perfekt für den grösseren Hunger" },
+            { name: "Cesarsalat", priceVariants: { klein: "CHF 15.00", gross: "CHF 22.00" }, description: "mit gebratener Pouletbrust einfach lecker" },
+            { name: "Tagessalat", price: "CHF 9.50", description: "bunter Mix aus Saisonalen Zutaten" },
+            { name: "Blattsalat", price: "CHF 9.00", description: "knackiger Blattsalat an feinem Dressing" },
+            { name: "Gemischter Salat", price: "CHF 11.00", description: "harmonische Kombination, frisch und knackig" },
+            { name: "Blattsalat nach Wahl", price: "CHF 16.50", description: "mit Frühlingsrollen, Samosa, Sesamstängeli oder pan. Crevetten serviert mit süsser Chilisauce" },
+            { name: "Kartoffelsalat", price: "CHF 8.00", description: "herzhaft und lecker" },
+            { name: "Siedfleischsalat", priceVariants: { klein: "CHF 14.50", gross: "CHF 21.50" }, description: "es hät solang`s hät" },
+            { name: "Thonsalat einfach", price: "CHF 13.00", description: "perfekt für den kleinen Hunger" },
+            { name: "Thonsalat garniert", price: "CHF 15.50", description: "liebevoll garniert - perfekt für den kleinen Hunger" }
         ]
     },
     {
-        section: "Hot meals",
+        section: "Warme Speisen",
         items: [
-            { name: "French fries", price: "CHF 9.00", description: "Golden brown and crispy" },
-            { name: "Truffle French Fries", price: "CHF 11.00", description: "refined with fine truffle oil" },
-            { name: "Black Angus Burger *", price: "CHF 14.50", description: "A delight made from high-quality beef and fresh ingredients" },
-            { name: "Black Angus Cheeseburger *", price: "CHF 15.50", description: "A delight made from high-quality beef and fresh ingredients" },
-            { name: "Veggie Burger *", price: "CHF 11.50", description: "A hearty vegetable patty that will also win over meat lovers" },
-            { name: "Breaded pork schnitzel *", price: "CHF 18.50", description: "crispy and golden brown fried" },
-            { name: "Schnitzel in pita bread *", price: "CHF 14.00", description: "crispy and delicious" },
-            { name: "Pair of Vienna sausages", price: "CHF 6.00", description: "served with bread" },
-            { name: "Chicken Nuggets *", price: "CHF 9.00", description: "perfect for a small appetite" },
-            { name: "Crispy Fish *", price: "CHF 19.50", description: "served with creamy tartar sauce" },
-            { name: "Pinsa Margherita", price: "CHF 15.00", description: "light and delicious" },
-            { name: "Pinsa with meat", price: "CHF 16.50", description: "light and delicious" },
-            { name: "Spring rolls", price: "CHF 8.50", description: "filled with vegetables and served with sweet chili sauce" },
-            { name: "Sesame sticks", price: "CHF 8.50", description: "filled with spicy chicken and served with sweet chili sauce" },
-            { name: "Samosa", price: "CHF 8.50", description: "filled with spicy vegetables and served with sweet chili sauce" },
-            { name: "Breaded prawns", price: "CHF 8.50", description: "filled with vegetables and served with sweet chili sauce" },
-            { name: "Asian Platter", price: "CHF 17.00", description: "Spring rolls, samosas, sesame sticks, and pan-fried shrimp served with sweet chili sauce" }
+            { name: "Pommes Frites", price: "CHF 9.00", description: "Goldbraun und knusprig" },
+            { name: "Trüffel Pommes Frites", price: "CHF 11.00", description: "verfeinert mit edlem Trüffelöl" },
+            { name: "Black Angus Burger *", price: "CHF 14.50", description: "ein Genuss aus hochwertigem Rindfleisch und frischen Zutaten" },
+            { name: "Black Angus Cheeseburger *", price: "CHF 15.50", description: "ein Genuss aus hochwertigem Rindfleisch und frischen Zutaten" },
+            { name: "Vegi Burger *", price: "CHF 11.50", description: "herzhaftes Gemüsepatty, das auch Fleischliebhaber überzeugt" },
+            { name: "Schweineschnitzel paniert *", price: "CHF 18.50", description: "knusprig und goldbraun gebraten" },
+            { name: "Schnitzel im Pitabrot *", price: "CHF 14.00", description: "knusprig und lecker" },
+            { name: "Paar Wienerli", price: "CHF 6.00", description: "serviert mit Brot" },
+            { name: "Chicken Nuggets *", price: "CHF 9.00", description: "perfekt für den kleinen Hunger" },
+            { name: "Fisch Chnusperli *", price: "CHF 19.50", description: "serviert mit cremiger Tartarsauce" },
+            { name: "Pinsa Margherita", price: "CHF 15.00", description: "luftig und lecker" },
+            { name: "Pinsa mit Fleisch", price: "CHF 16.50", description: "luftig und lecker" },
+            { name: "Frühlingsrollen", price: "CHF 8.50", description: "gefüllt mit Gemüse und serviert mit süsser Chilisauce" },
+            { name: "Sesamstängeli", price: "CHF 8.50", description: "gefüllt mit würzigem Pouletfleisch und serviert mit süsser Chilisauce" },
+            { name: "Samosa", price: "CHF 8.50", description: "gefüllt mit würzigem Gemüse und serviert mit süsser Chilisauce" },
+            { name: "Panierte Crevetten", price: "CHF 8.50", description: "gefüllt mit Gemüse und serviert mit süsser Chilisauce" },
+            { name: "Asia Platte", price: "CHF 17.00", description: "Frühlingsrollen, Samosa, Sesamstängeli und pan. Crevetten serviert mit süsser Chilisauce" }
         ]
     },
     {
-        section: "Side dishes",
+        section: "*Beilagen",
         items: [
-            { name: "Salad", price: "CHF 4.00" },
-            { name: "French fries", price: "CHF 3.00" }
+            { name: "Salat", price: "CHF 4.00" },
+            { name: "Pommes", price: "CHF 3.00" }
         ]
     }
 ];
