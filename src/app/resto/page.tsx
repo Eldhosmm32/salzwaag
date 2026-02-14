@@ -1,9 +1,9 @@
 "use client"
 import Navbar from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
-import { Table, TableCell, TableBody, TableRow } from "@/components/ui/table";
 import Image from "next/image";
 import Link from "next/link";
+import { Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 
 type MenuItem =
@@ -472,4 +472,10 @@ const RestoPage = () => {
 
 }
 
-export default RestoPage;
+export default function RestoPageWithSuspense() {
+    return (
+        <Suspense fallback={<div className="w-full min-h-screen flex items-center justify-center">Loading...</div>}>
+            <RestoPage />
+        </Suspense>
+    );
+}
