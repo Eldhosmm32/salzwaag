@@ -10,6 +10,7 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { Card, CardContent } from "@/components/ui/card";
+import Maps from "@/components/Maps";
 
 const CarouselItems = [
     {
@@ -251,48 +252,15 @@ const HomePage = () => {
 
                         <div className="flex gap-4 p-2 pt-5">
                             <div className="w-1/3 h-80 rounded-md overflow-hidden bg-muted relative">
-                                {isMounted && (
-                                    <>
-                                        <iframe width="400" height="400" scrolling="no" id="gmap_canvas" src="https://maps.google.com/maps?width=520&amp;height=400&amp;hl=en&amp;q=Wirtschaft%20zur%20Salzwaag%20Allenbergstrasse%2047,%208712%20St%C3%A4fa%20Allenbergstrasse%20+(Wirtschaft%20zur%20Salzwaag)&amp;t=&amp;z=13&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe> <a href='https://www.versicherungen.at/auslandsversicherung-rechner/'>Ausland Kranken/Unfall-Versicherung</a> <script type='text/javascript' src='https://embedmaps.com/google-maps-authorization/script.js?id=3daa432b640b69b3ae04c4b0a528da51c2645af3'></script>
-                                    </>
-                                )}
-
-                                <div className="absolute bottom-0 left-0 w-full h-auto">
-                                    <div className="bg-black/15 carousel-text-section px-4 py-2">
-                                        <h3 className="text-white text-lg font-bold">Call: 043 477 05 04</h3>
-                                    </div>
-                                </div>
-
+                                <Maps Id={0}></Maps>
                             </div>
 
                             <div className="w-1/3 h-80 rounded-md overflow-hidden bg-muted relative">
-                                {isMounted && (
-                                    <>
-                                        <iframe width="400" height="400" scrolling="no" id="gmap_canvas" src="https://maps.google.com/maps?width=520&amp;height=400&amp;hl=en&amp;q=Strandbad%20Uetikon,%20Seestrasse%20144,%208707%20Uetikon%20am%20See%20Uetikon%20am%20See+(Strandbad%20Uetikon)&amp;t=&amp;z=13&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe> <a href='https://www.versicherungen.at/auslandsversicherung-rechner/'>Ausland Kranken/Unfall-Versicherung</a> <script type='text/javascript' src='https://embedmaps.com/google-maps-authorization/script.js?id=72c9bfb1e052c13abe687e2386b9b5f372b95d11'></script>
-                                    </>
-                                )}
-
-                                <div className="absolute bottom-0 left-0 w-full h-auto">
-                                    <div className="bg-black/15 carousel-text-section px-4 py-2">
-                                        <h3 className="text-white text-lg font-bold">Call: 044 920 22 33</h3>
-                                    </div>
-                                </div>
-
+                                <Maps Id={1}></Maps>
                             </div>
 
                             <div className="w-1/3 h-80 rounded-md overflow-hidden bg-muted relative">
-                                {isMounted && (
-                                    <>
-                                        <iframe width="400" height="400" scrolling="no" id="gmap_canvas" src="https://maps.google.com/maps?width=520&amp;height=400&amp;hl=en&amp;q=Schiffsteg%20Bistro,%20Seestrasse%20St%C3%A4fa+(Bistro%20Schiffsteg)&amp;t=&amp;z=13&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe> <a href='https://www.versicherungen.at/auslandsversicherung-rechner/'>Ausland Kranken/Unfall-Versicherung</a> <script type='text/javascript' src='https://embedmaps.com/google-maps-authorization/script.js?id=07d88cf37b9384bd31fb0525f3f1451107115173'></script>
-                                    </>
-                                )}
-
-                                <div className="absolute bottom-0 left-0 w-full h-auto">
-                                    <div className="bg-black/15 carousel-text-section px-4 py-2">
-                                        <h3 className="text-white text-lg font-bold">Call: 043 818 05 00</h3>
-                                    </div>
-                                </div>
-
+                                <Maps Id={1}></Maps>
                             </div>
                         </div>
 
@@ -322,9 +290,9 @@ const HomePage = () => {
 
                 </div>
 
-            </div>
+            </div >
 
-            <div className="flex md:hidden flex-col items-center h-screen relative overflow-hidden">
+            {/* <div className="flex md:hidden flex-col items-center h-screen relative overflow-hidden">
                 <div className="w-full h-screen max-w-4xl mx-auto z-10 ">
                     <MainCarousel
                         opts={{
@@ -374,7 +342,37 @@ const HomePage = () => {
                     </div>
 
                 </div>
-            </div >
+            </div > */}
+
+            <div className="flex md:hidden flex-col items-center min-h-screen w-full relative overflow-auto pt-4 main-bg">
+                <Image
+                    src={'/wzs-logo.png'}
+                    alt="Logo"
+                    width={150}
+                    height={150}
+                />
+                <div className="flex flex-col gap-4 w-full pt-8 px-4 pb-8">
+                    {CarouselItems.map((item, index) => (
+                        <Link key={index} href={`/reservation?restoId=${index}`} className="block w-full">
+                            <div className="relative h-75 rounded-2xl overflow-hidden w-full">
+                                <Image src={item.image} alt={item.title} fill className="object-cover" sizes="100vw" />
+                                <div className="absolute bottom-0 left-0 w-full h-auto p-2">
+                                    <div className="bg-black/15 carousel-text-section rounded-2xl px-4 py-2">
+                                        <h3 className="text-white text-2xl font-bold">{item.title}</h3>
+                                        <h5 className="text-white text-md font-normal">{item.location}</h5>
+                                    </div>
+                                </div>
+                                <div className="arrow-section absolute right-2 top-2 w-10 h-10 p-2 rounded-full bg-black/15 backdrop-blur-xs flex items-center justify-center">
+                                    <Image src="/icons/arrow-right.svg" alt="Arrow" width={18} height={18} sizes="100vw" />
+                                </div>
+                                <div className="carousel-text-section absolute left-2 top-2 w-fit h-fit text-sm p-2 rounded-3xl bg-black/25 text-white">
+                                    Open Now
+                                </div>
+                            </div>
+                        </Link>
+                    ))}
+                </div>
+            </div>
 
 
         </>

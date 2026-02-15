@@ -3,6 +3,7 @@ import { gsap } from 'gsap';
 // use your own icon import if react-icons is not available
 import { GoArrowUpRight } from 'react-icons/go';
 import Link from 'next/link';
+import { Dialog, DialogDescription, DialogHeader, DialogContent, DialogTrigger, DialogTitle } from './ui/dialog';
 
 type CardNavLink = {
   label: string;
@@ -191,13 +192,22 @@ const CardNav: React.FC<CardNavProps> = ({
             <img src={logo} alt={logoAlt} className="logo h-[45px]" />
           </div>
 
-          <button
-            type="button"
-            className="card-nav-cta-button scale-95 hover:scale-100 transition-scale duration-300 hidden md:inline-flex border-0 rounded-[calc(0.75rem-0.2rem)] px-4 items-center h-full font-medium cursor-pointer"
-            style={{ backgroundColor: buttonBgColor, color: buttonTextColor }}
-          >
-            {buttonLink ? <Link href={buttonLink}>{buttonText}</Link> : buttonText}
-          </button>
+          <Dialog >
+            <DialogTrigger
+              style={{ backgroundColor: buttonBgColor, color: buttonTextColor }}
+              className="card-nav-cta-button scale-95 hover:scale-100 transition-scale duration-300 hidden md:inline-flex border-0 rounded-[calc(0.75rem-0.2rem)] px-4 items-center h-full font-medium cursor-pointer"
+            >{buttonText}</DialogTrigger>
+            <DialogContent className="main-bg">
+              <DialogTitle className='hidden' ></DialogTitle>
+              <DialogHeader>
+                <DialogDescription>
+                  <span className="text-xl font-bold py-5"> Wir freuen uns Ihre Reservationen telefonisch unter
+                    <span className="text-(--salz-color) text-3xl">&nbsp;043 477 05 04&nbsp;</span> <br /> entgegen zu nehmen.
+                    Ihr Wirtschaft zur Salzwaag Team </span>
+                </DialogDescription>
+              </DialogHeader>
+            </DialogContent>
+          </Dialog>
         </div>
 
         <div

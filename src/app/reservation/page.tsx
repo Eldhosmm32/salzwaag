@@ -1,6 +1,7 @@
 import { RestoTabs, RestoTabsContent, RestoTabsList, RestoTabsTrigger } from "@/components/ui/resto-tabs";
 
 import ReservationPage from "./[restoId]";
+import Image from "next/image";
 
 
 const RestaurantItems = [
@@ -29,8 +30,14 @@ const RestaurantItems = [
 
 const Reservation = () => (
     <div className="flex flex-col items-center h-screen relative overflow-hidden main-bg">
-        <div className="flex flex-col gap-2 w-full p-5 ">
-            <h3 className="text-3xl font-bold">Find your Perfect <br /> Restorent</h3>
+        <div className="flex flex-col items-center gap-2 w-full p-5 ">
+            {/* <h3 className="text-3xl font-bold">Find your Perfect <br /> Restorent</h3> */}
+            <Image
+                src={'/wzs-logo.png'}
+                alt="Logo"
+                width={150}
+                height={150}
+            />
             <RestoTabs defaultValue="restaurant-0" className="w-full">
                 <RestoTabsList variant="card" className="w-full justify-start overflow-auto">
                     {RestaurantItems.map((item, index) => (
