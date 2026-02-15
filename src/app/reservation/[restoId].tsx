@@ -353,7 +353,7 @@ const ReservationPage = ({ restoId }: { restoId: number }) => {
     const [api, setApi] = React.useState<CarouselApi>();
 
     useEffect(() => {
-        alert(restoId);
+        // alert(restoId);
         api?.scrollTo(restoId);
     }, []);
 
