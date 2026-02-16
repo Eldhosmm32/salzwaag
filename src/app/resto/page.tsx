@@ -55,99 +55,10 @@ const RestaurantItems = [
     },
 ];
 
-const OpeningHours = {
-    0: [
-        {
-            day: "Monday",
-            hours: "Closed"
-        },
-        {
-            day: "Tuesday",
-            hours: "8:30 AM - 11:30 PM"
-        },
-        {
-            day: "Wednesday",
-            hours: "8:30 AM - 11:30 PM"
-        },
-        {
-            day: "Thursday",
-            hours: "8:30 AM - 11:30 PM"
-        },
-        {
-            day: "Friday",
-            hours: "8:30 AM - 11:30 PM"
-        },
-        {
-            day: "Saturday",
-            hours: "8:30 AM - 11:30 PM"
-        },
-        {
-            day: "Sunday",
-            hours: "8:30 AM - 11:30 PM"
-        }
-    ],
-
-    1: [
-        {
-            day: "Monday",
-            hours: "11:00 AM - 8:00 PM"
-        },
-        {
-            day: "Tuesday",
-            hours: "10:00 AM - 8:00 PM"
-        },
-        {
-            day: "Wednesday",
-            hours: "10:00 AM - 8:00 PM"
-        },
-        {
-            day: "Thursday",
-            hours: "10:00 AM - 8:00 PM"
-        },
-        {
-            day: "Friday",
-            hours: "10:00 AM - 8:00 PM"
-        },
-        {
-            day: "Saturday",
-            hours: "10:00 AM - 8:00 PM"
-        },
-        {
-            day: "Sunday",
-            hours: "9:00 AM - 7:00 PM"
-        }
-    ],
-
-    2: [
-        {
-            day: "Monday",
-            hours: "9:00 AM - 12:00 AM"
-        },
-        {
-            day: "Tuesday",
-            hours: "9:00 AM - 12:00 AM"
-        },
-        {
-            day: "Wednesday",
-            hours: "9:00 AM - 12:00 AM"
-        },
-        {
-            day: "Thursday",
-            hours: "9:00 AM - 12:00 AM"
-        },
-        {
-            day: "Friday",
-            hours: "9:00 AM - 12:00 AM"
-        },
-        {
-            day: "Saturday",
-            hours: "9:00 AM - 12:00 AM"
-        },
-        {
-            day: "Sunday",
-            hours: "9:00 AM - 12:00 AM"
-        }
-    ]
+const OpeningHours: any = {
+    0: ["Montag Closed", "Dienstag bis Sonntag", "- 08:30 Uhr bis 23:30 Uhr"],
+    1: ["Montag 11.00 Uhr bis 20.00 Uhr", "Dienstag bis Samstag 10.00 Uhr bis 20.00 Uhr", "Sonntag 09.00 Uhr bis 19.00 Uhr"],
+    2: ["Montag bis Sonntag", "- 09:00 Uhr – 24:00 Uhr"]
 }
 
 
@@ -194,7 +105,7 @@ const menuDataBadi: MenuData = [
         ]
     },
     {
-        section: "*Beilagen",
+        section: "Beilagen",
         items: [
             { name: "Salat", price: "CHF 4.00" },
             { name: "Pommes", price: "CHF 3.00" }
@@ -365,22 +276,21 @@ const RestoPage = () => {
 
 
     return (
-        <div className="w-full flex flex-col gap-2 items-center h-screen z-10 ">
+        <div className="w-full flex flex-col gap-2 items-center z-10 ">
             <div className="fixed top-0 left-0 w-full z-50">
                 <Navbar />
             </div>
 
-            <div className="w-full h-full relative resto-bg">
+            <div className="w-full h-screen relative flex flex-col gap-8 resto-bg pt-35 ">
+                <Image src={'/images/food-6.jpg'} alt="Chef" fill className="object-cover z-0 brightness-75" sizes="100vw" />
 
-                <div className="mx-auto h-120 flex">
-                    <div className="w-1/2 pl-45 pr-10 flex flex-col justify-center gap-4">
-                        <div className="flex flex-col text-black gap-4 font-(family-name:--font-lora)">
-                            <h2 className="text-6xl font-bold">{RestaurantItems[safeRestoId].title}</h2>
-                            <h3 className="text-xl font-normal">{RestaurantItems[safeRestoId].desc}</h3>
-                        </div>
+                <div className="w-6xl mx-auto flex justify-between gap-4 z-10 ">
+                    <div className="flex flex-col text-white gap-4 font-(family-name:--font-lora)">
+                        <h2 className="text-6xl font-bold">{RestaurantItems[safeRestoId].title}</h2>
+                        <h3 className="text-xl font-normal">{RestaurantItems[safeRestoId].desc}</h3>
                         <div className="flex gap-4">
                             <Dialog >
-                                <DialogTrigger className="salz-btn w-fit text-white">Reservationen</DialogTrigger>
+                                <DialogTrigger className="salz-btn w-fit text-white font-(family-name:--font-poppins)">Reservationen & Take-Away</DialogTrigger>
                                 <DialogContent className="main-bg">
                                     <DialogHeader>
                                         <DialogTitle className="hidden"></DialogTitle>
@@ -395,35 +305,35 @@ const RestoPage = () => {
                         </div>
                     </div>
 
-                    <div className="w-1/2 h-full relative overflow-hidden">
-
-                        <div className="flex gap-2 absolute left-2 bottom-14 z-10">
-                            <div className="w-90 h-60 rounded-md overflow-hidden bg-muted relative">
-                                <Maps Id={restoId}></Maps>
-                            </div>
+                    <div className="flex flex-col items-start h-fit min-w-60 p-4 rounded-md gap-2 z-10 bg-white/15 backdrop-blur-md">
+                        <div className="text-md font-semibold text-white">
+                            Öffnungszeiten
                         </div>
-
-                        <div className="flex gap-2 absolute left-2 bottom-2">
-                            <div className="carousel-text-section w-fit h-fit text-sm p-2 px-3 rounded-lg bg-red-500/50 text-white z-10">
-                                Monday Closed
-                            </div>
-                            <div className="carousel-text-section w-fit h-fit text-sm p-2  px-3 rounded-lg bg-green-500/50 text-white z-10">
-                                Open from Tuesday to Sunday 08:30 AM - 11:3 0 PM
-                            </div>
-                        </div>
-                        <Image src={RestaurantItems[safeRestoId].image} alt="Chef" fill className="object-cover z-0 brightness-75 hover:scale-105 transition-all duration-300" sizes="100vw" />
+                        {OpeningHours && OpeningHours[restoId].map((item: any, index: any) => {
+                            return (<div key={index} className="text-md text-white" >
+                                {item}
+                            </div>)
+                        })}
                     </div>
+                </div>
 
+                <div className="w-6xl mx-auto h-80 relative flex gap-4">
+                    <div className="w-1/2 gap-2 z-10 rounded-md overflow-hidden bg-muted relative">
+                        <Maps Id={restoId} Width={600}></Maps>
+                    </div>
+                    <div className="w-1/2 relative  overflow-hidden rounded-md ">
+                        <Image src={RestaurantItems[safeRestoId].image} alt="Chef" fill className="object-cover z-0 brightness-95 hover:scale-105 transition-all duration-300" sizes="100vw" />
+                    </div>
                 </div>
             </div>
 
-            <div className="w-6xl h-fit flex gap-2">
-                <div className="w-full bg-white relative flex flex-col gap-2 p-5">
-                    <h1 className="text-5xl font-bold text-(--salz-color) pt-5">Menu</h1>
+            <div className="w-6xl h-fit flex gap-8 pt-5">
+                <div className="w-[75%] relative flex flex-col gap-2 p-5">
+                    <h1 className="text-5xl font-bold text-(--salz-color)">Menu</h1>
                     <div className="flex flex-col gap-2">
                         {(menuDataByRestaurant[safeRestoId] ?? menuDataBadi).map((sect) => (
                             <div key={sect.section} className="flex flex-col gap-2">
-                                <div className="w-full pt-10 pb-5">
+                                <div className="w-full py-5">
                                     <h1 className="text-2xl font-bold">{sect.section}</h1>
                                     {sect.description && <h4 className="text-md text-gray-400 font-normal">{sect.description}</h4>}
                                 </div>
@@ -431,16 +341,16 @@ const RestoPage = () => {
                                     {sect.items.map((item, index) => (
                                         <div key={`${sect.section}-${index}`} className="cursor-pointer bg-white h-30 border border-grey rounded-md overflow-hidden gap-2 flex w-full relative hover:border-(--salz-color)/80 hover:scale-102 transition-all duration-300 group">
                                             <div className="relative h-30 w-30">
-                                                <Image src="/images/def-food.png" alt={item.name} fill className="object-cover brightness-90 group-hover:brightness-100 transition-all duration-300 rounded-md" sizes="100vw" />
+                                                <Image src="/images/def-food.png" alt={item.name} fill className="p-1 object-cover brightness-90 group-hover:brightness-100 transition-all duration-300 rounded-md" sizes="100vw" />
                                             </div>
-                                            <div className=" pt-2 overflow-hidden text-black flex flex-col gap-1  p-2 bg-white/30 group-hover:bg-white/80 transition-all duration-300 backdrop-blur-xs">
-                                                <h3 className="text-lg font-semibold w-full">{item.name}</h3>
+                                            <div className="w-70 pt-2 overflow-hidden text-black flex flex-col gap-1 p-2 bg-white/30 group-hover:bg-white/80 transition-all duration-300 backdrop-blur-xs">
+                                                <h3 className="text-md font-semibold w-full">{item.name}</h3>
                                                 {item.description && (
-                                                    <h4 className="w-60 text-xs text-normal">{item.description}</h4>
+                                                    <h4 className="w-60 text-xs text-normal text-gray-600">{item.description}</h4>
                                                 )}
                                             </div>
 
-                                            <div className="absolute bottom-2 right-2 p-2 bg-white/50 group-hover:bg-white transition-all duration-300 text-(--salz-color) font-bold backdrop-blur-xs rounded-md">
+                                            <div className="absolute bottom-0 right-0 p-2 bg-white/50 group-hover:bg-white transition-all duration-300 text-(--salz-color) font-bold backdrop-blur-xs rounded-md">
                                                 {'priceVariants' in item ? (
                                                     <div className="flex flex-col items-end gap-0.5">
                                                         {Object.entries(item.priceVariants).map(([variant, priceVal]) => (
@@ -456,6 +366,40 @@ const RestoPage = () => {
                                 </div>
                             </div>
                         ))}
+                    </div>
+                </div>
+                <div className="w-[25%] sticky top-35 self-start flex flex-col gap-4 ">
+
+                    <div className="p-4 main-bg border border-gray-200 shadow rounded-md">
+                        <div className="text-black text-sm">
+                            Take-Away nach Vorbestellung
+                        </div>
+                    </div>
+
+
+                    <div className="p-4 rounded-md border border-gray-200 shadow text-black text-sm font-light">
+                        <span className="font-semibold">Note:</span>
+                        <br />
+                        <span className="text-(--salz-color)">●</span> Fleisch und Fisch Herkunft Schweiz
+                        <br />
+                        <span className="text-(--salz-color)">●</span> Preise in CHF inkl.
+                        <br />
+                        <span className="text-(--salz-color)">●</span> Mehrwertsteuer  Änderungen vorbehalten
+                        <br />
+                        <span className="text-(--salz-color)">●</span> Für Informationen zu Allergenen wenden Sie sich bitte
+                        an unser Personal.
+                    </div>
+
+
+                    <div className="p-4 border border-gray-200 rounded-md shadow flex flex-col gap-3">
+                        <div className="text-black ">
+                            <span className="text-md font-light text-md">Hat es Ihnen geschmeckt?</span>
+                            <br /><span className="text-black">
+                                Wir freuen uns auf Ihr Feedback
+                            </span>
+                        </div>
+
+                        <Button className="salz-btn w-fit h-9!">Feedback bei Google</Button>
                     </div>
                 </div>
 

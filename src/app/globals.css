@@ -153,12 +153,13 @@ body {
   font-size: 1rem;
   padding: 0.75rem;
   height: unset;
-  background-color: var(--salz-color);
+  background-color: #e29f35;
   border-color: var(--salz-color);
+
 }
 
 .salz-btn:hover {
-  filter: brightness(80%);
+  background-color: var(--salz-color);
   transition: all 0.3s ease;
 }
 
@@ -191,7 +192,8 @@ body {
 }
 
 .resto-bg {
-  background-image: linear-gradient(to top, #e6b980 0%, #eacda3 100%);
+  /* background-image: linear-gradient(to top, #e6b980 0%, #eacda3 100%); */
+  background-image: linear-gradient(to left, #6a85b6 0%, #bac8e0 100%);
 }
 
 .salz-shadow {

@@ -77,27 +77,7 @@ const MenuItems = [
         title: "Sandwiches of your choice ",
         price: "CHF 7.00"
     },
-    {
-        id: 7,
-        restaurantId: 2,
-        image: '/images/food-3.jpg',
-        title: "Half a chicken with salad",
-        price: "CHF 12.30"
-    },
-    {
-        id: 8,
-        restaurantId: 2,
-        image: '/images/food-6.jpg',
-        title: "Half a chicken with salad and fries",
-        price: "CHF 3.30"
-    },
-    {
-        id: 9,
-        restaurantId: 2,
-        image: '/images/food-2.jpg',
-        title: "Dockside salad with grilled duck",
-        price: "CHF 24.30"
-    }
+
 ];
 
 const HomePage = () => {
@@ -117,20 +97,20 @@ const HomePage = () => {
                 <div className="w-full flex flex-col items-center justify-center h-screen z-10 relative">
                     <Image src="/images/saal.webp" alt="Chef" fill className="object-cover z-0 brightness-75" sizes="100vw" />
 
-                    <div className="flex flex-col justify-center h-[calc(100vh-12rem)] z-10 absolute top-35 left-0 w-full p-10">
+                    <div className="flex flex-col gap-8 justify-center h-[calc(100vh-12rem)] z-10 absolute top-35 left-0 w-full p-10">
 
-                        <div className="w-6xl mx-auto p-3">
+                        <div className="w-6xl mx-auto">
                             <div className=" text-white rounded-xl flex flex-col items-center justify-center gap-3 px-2 py-4">
                                 <div className="w-full flex gap-2">
                                     <h1 className="text-5xl font-bold ">Welcome to <span className="text-(--salz-color)">Salzwaag</span></h1>
                                 </div>
                                 <div className="w-full">
-                                    <h3 className="text-xl">Spice up your everyday life with an exotic sensory experience or enjoy a cozy feeling of home with Swiss favorites - in a restaurant, at your event or at your home.</h3>
+                                    <h3 className="text-xl font-normal">Den Alltag mit einem exotischen Sinnesrausch aufpeppen oder wohliges Heimatgefühl mit Schweizer Leibspeisen geniessen - im Restaurant, auf Ihrem Event oder bei Ihnen zu Hause.</h3>
                                 </div>
                             </div>
                         </div>
 
-                        <Carousel className="w-6xl mx-auto h-full p-3" opts={
+                        <Carousel className="w-6xl mx-auto h-full" opts={
                             {
                                 loop: true,
                                 duration: 50,
@@ -173,8 +153,8 @@ const HomePage = () => {
 
                 {/* Hosts */}
 
-                <div className="w-full flex flex-col h-screen z-10">
-                    <div className="w-6xl mx-auto p-3 py-5">
+                <div className="w-full flex flex-col justify-center h-screen z-10">
+                    <div className="w-6xl mx-auto py-5">
                         <h1 className="text-5xl font-bold text-(--salz-color) py-5">Our Hosts</h1>
                         <div className="w-full flex items-center gap-8">
                             <div className="w-1/2 relative h-120 rounded-2xl overflow-hidden">
@@ -217,12 +197,12 @@ const HomePage = () => {
 
                 {/* Specials */}
 
-                <div className="w-full flex flex-col min-h-screen z-10">
-                    <div className="w-6xl mx-auto p-3 py-5">
+                <div className="w-full flex flex-col justify-center min-h-screen z-10">
+                    <div className="w-6xl mx-auto py-5">
                         <h1 className="text-5xl font-bold text-(--salz-color) py-5">Our Specials</h1>
-                        <div className="grid grid-cols-3 gap-2">
+                        <div className="grid grid-cols-3 gap-10">
                             {MenuItems.map((item, index) => (
-                                <div key={index} className={`p-2 cursor-pointer bg-white border-3 h-70 border-gray-200 rounded-md overflow-hidden gap-2 flex w-full relative hover:border-(--salz-color)/80 hover:scale-102 transition-all duration-300 group`}>
+                                <div key={index} className={`p-2 cursor-pointer bg-white border-3 h-50 border-gray-200 rounded-md overflow-hidden gap-2 flex w-full relative hover:border-(--salz-color)/80 hover:scale-102 transition-all duration-300 group`}>
                                     <Image src={item.image} alt="Reservation" fill className="object-cover brightness-90 group-hover:brightness-100 transition-all duration-300" sizes="100vw" />
                                     <div className="w-full pt-2 overflow-hidden text-black flex flex-col gap-1 absolute bottom-0 left-0 p-2 bg-white/30 group-hover:bg-white/80 transition-all duration-300 backdrop-blur-xs">
                                         <h3 className="text-lg font-semibold whitespace-nowrap text-ellipsis overflow-hidden ">{item.title}</h3>
@@ -246,20 +226,20 @@ const HomePage = () => {
 
                 <div className="w-full flex gap-4 flex-col  z-10 relative p-5 footer-bg">
 
-                    <div className="w-6xl mx-auto p-3 py-5 bg-white rounded-md z-10 ">
-                        <h1 className="text-3xl font-bold text-(--salz-color)">About Us</h1>
+                    <div className="w-6xl mx-auto py-5 bg-white rounded-md z-10 ">
+                        <h1 className="text-4xl font-bold text-(--salz-color)">Contact Us</h1>
                         <h1 className="text-md font-normal text-black italic">Culinary delights at three locations</h1>
 
-                        <div className="flex gap-4 p-2 pt-5">
-                            <div className="w-1/3 h-80 rounded-md overflow-hidden bg-muted relative">
+                        <div className="flex gap-4 justify-around p-5 pt-5">
+                            <div className="w-1/3 h-70 rounded-md overflow-hidden bg-muted relative">
                                 <Maps Id={0}></Maps>
                             </div>
 
-                            <div className="w-1/3 h-80 rounded-md overflow-hidden bg-muted relative">
+                            <div className="w-1/3 h-70 rounded-md overflow-hidden bg-muted relative">
                                 <Maps Id={1}></Maps>
                             </div>
 
-                            <div className="w-1/3 h-80 rounded-md overflow-hidden bg-muted relative">
+                            <div className="w-1/3 h-70 rounded-md overflow-hidden bg-muted relative">
                                 <Maps Id={1}></Maps>
                             </div>
                         </div>
@@ -267,7 +247,7 @@ const HomePage = () => {
                         {/* Footer */}
 
                         <footer className="flex flex-col gap-4">
-                            <div className="flex flex-col gap-4 items-center justify-center border-b border-border py-5">
+                            <div className="flex flex-col gap-4 items-center justify-center border-b border-border py-5 px-15">
                                 <Link href="/" className="text-2xl font-bold text-(--salz-color) hover:opacity-90 transition-opacity">
                                     <Image
                                         src={'/wzs-logo.png'}
@@ -277,8 +257,8 @@ const HomePage = () => {
                                         className="object-contain z-10"
                                     />
                                 </Link>
-                                <p className="text-sm text-muted-foreground">
-                                    Spice up your everyday life with an exotic sensory experience or enjoy Swiss favorites – in a restaurant, at your event or at your home.
+                                <p className="text-sm text-center text-muted-foreground">
+                                    Den Alltag mit einem exotischen Sinnesrausch aufpeppen oder wohliges Heimatgefühl mit Schweizer Leibspeisen geniessen - im Restaurant, auf Ihrem Event oder bei Ihnen zu Hause.
                                 </p>
                             </div>
 
@@ -353,7 +333,7 @@ const HomePage = () => {
                 />
                 <div className="flex flex-col gap-4 w-full pt-8 px-4 pb-8">
                     {CarouselItems.map((item, index) => (
-                        <Link key={index} href={`/reservation?restoId=${index}`} className="block w-full">
+                        <Link key={index} href={`/menu?restoId=${index}`} className="block w-full">
                             <div className="relative h-75 rounded-2xl overflow-hidden w-full">
                                 <Image src={item.image} alt={item.title} fill className="object-cover" sizes="100vw" />
                                 <div className="absolute bottom-0 left-0 w-full h-auto p-2">
@@ -373,8 +353,6 @@ const HomePage = () => {
                     ))}
                 </div>
             </div>
-
-
         </>
     );
 };

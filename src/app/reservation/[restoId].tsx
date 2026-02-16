@@ -350,13 +350,6 @@ const OpeningHours = {
 }
 const ReservationPage = ({ restoId }: { restoId: number }) => {
 
-    const [api, setApi] = React.useState<CarouselApi>();
-
-    useEffect(() => {
-        // alert(restoId);
-        api?.scrollTo(restoId);
-    }, []);
-
     return (
         <div>
             <div className="flex gap-5 flex-col w-full h-screen overflow-scroll">
@@ -367,7 +360,6 @@ const ReservationPage = ({ restoId }: { restoId: number }) => {
                             opts={{
                                 align: "center",
                             }}
-                            setApi={setApi}
                             className="w-full sm:max-w-xs md:max-w-sm"
                         >
                             <CarouselContent>
