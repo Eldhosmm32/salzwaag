@@ -1,16 +1,12 @@
 "use client"
 
+import Maps from "@/components/Maps";
 import Navbar from "@/components/Navbar";
-import NavbarMobile from "@/components/Navbar";
-import { Button } from "@/components/ui/button";
-import { MainCarousel, MainCarouselContent, MainCarouselItem } from "@/components/ui/main-carousel";
+import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
-import { Card, CardContent } from "@/components/ui/card";
-import Maps from "@/components/Maps";
+import { useEffect, useState } from "react";
 
 const CarouselItems = [
     {
@@ -80,6 +76,179 @@ const MenuItems = [
 
 ];
 
+const OpeningHours: any = {
+    0: [
+        {
+            day: 0,
+            hours: {
+                open: "8:30",
+                close: "23:30"
+            }
+        }, {
+            day: 1,
+            hours: null
+        },
+        {
+            day: 2,
+            hours: {
+                open: "8:30",
+                close: "23:30"
+            }
+        },
+        {
+            day: 3,
+            hours: {
+                open: "8:30",
+                close: "23:30"
+            }
+        },
+        {
+            day: 4,
+            hours: {
+                open: "8:30",
+                close: "23:30"
+            }
+        },
+        {
+            day: 5,
+            hours: {
+                open: "8:30",
+                close: "23:30"
+            }
+        },
+        {
+            day: 6,
+            hours: {
+                open: "8:30",
+                close: "23:30"
+            }
+        },
+
+    ],
+
+    1: [
+        {
+            day: 0,
+            hours: {
+                open: "09:00",
+                close: "19:00"
+            }
+        },
+        {
+            day: 1,
+            hours: {
+                open: "11:00",
+                close: "20:00"
+            }
+        },
+        {
+            day: 2,
+            hours: {
+                open: "10:00",
+                close: "20:00"
+            }
+        },
+        {
+            day: 3,
+            hours: {
+                open: "10:00",
+                close: "20:00"
+            }
+        },
+        {
+            day: 4,
+            hours: {
+                open: "10:00",
+                close: "20:00"
+            }
+        },
+        {
+            day: 5,
+            hours: {
+                open: "10:00",
+                close: "20:00"
+            }
+        },
+        {
+            day: 6,
+            hours: {
+                open: "10:00",
+                close: "20:00"
+            }
+        },
+
+    ],
+
+    2: [
+        {
+            day: 0,
+            hours: {
+                open: "09:00",
+                close: "23:59"
+            }
+        },
+        {
+            day: 1,
+            hours: {
+                open: "09:00",
+                close: "23:59"
+            }
+        },
+        {
+            day: 2,
+            hours: {
+                open: "09:00",
+                close: "23:59"
+            }
+        },
+        {
+            day: 3,
+            hours: {
+                open: "09:00",
+                close: "23:59"
+            }
+        },
+        {
+            day: 4,
+            hours: {
+                open: "09:00",
+                close: "23:59"
+            }
+        },
+        {
+            day: 5,
+            hours: {
+                open: "09:00",
+                close: "23:59"
+            }
+        },
+        {
+            day: 6,
+            hours: {
+                open: "09:00",
+                close: "23:59"
+            }
+        },
+
+    ]
+}
+
+const getOpenOrNot = (index: number) => {
+    const today = new Date().getDay();
+    const hours = OpeningHours[index][today]?.hours;
+    if (!hours) {
+        return "Closed";
+    }
+    let definedOpen = new Date()
+    let definedClose = new Date()
+    definedOpen.setHours(parseInt(hours?.open.split(':')[0]), parseInt(hours?.open.split(':')[1]), 0, 0);
+    definedClose.setHours(parseInt(hours?.close.split(':')[0]), parseInt(hours?.close.split(':')[1]), 0, 0);
+    if (definedClose < new Date()) {
+        return "Open at " + hours?.open;
+    }
+    return definedOpen > new Date() && definedClose < new Date() ? "Open at " + hours?.open : "Closed by " + hours?.close;
+}
+
 const HomePage = () => {
     const [isMounted, setIsMounted] = useState(false);
     useEffect(() => {
@@ -140,7 +309,7 @@ const HomePage = () => {
                                                 </div>
 
                                                 <div className="carousel-text-section absolute left-2 top-2 w-fit h-fit text-sm p-2 rounded-3xl bg-black/25 ">
-                                                    Open Now
+                                                    {getOpenOrNot(index)}
                                                 </div>
                                             </div>
                                         </Link>

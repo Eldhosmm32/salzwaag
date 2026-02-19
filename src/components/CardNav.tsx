@@ -1,9 +1,10 @@
-import React, { useLayoutEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
+import React, { useLayoutEffect, useRef, useState } from 'react';
 // use your own icon import if react-icons is not available
 import { GoArrowUpRight } from 'react-icons/go';
-import Link from 'next/link';
-import { Dialog, DialogDescription, DialogHeader, DialogContent, DialogTrigger, DialogTitle } from './ui/dialog';
+import { Button } from './ui/button';
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from './ui/dialog';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from './ui/dropdown-menu';
 
 type CardNavLink = {
   label: string;
@@ -163,7 +164,7 @@ const CardNav: React.FC<CardNavProps> = ({
 
   return (
     <div
-      className={`card-nav-container absolute left-1/2 -translate-x-1/2 w-[90%] max-w-[1128px] z-[99] top-[1.2em] md:top-[2em] ${className}`}
+      className={`card-nav-container absolute left-1/2 -translate-x-1/2 w-[90%] max-w-[1154px] z-[99] top-[1.2em] md:top-[2em] ${className}`}
     >
       <nav
         ref={navRef}
@@ -192,22 +193,23 @@ const CardNav: React.FC<CardNavProps> = ({
             <img src={logo} alt={logoAlt} className="logo h-[45px]" />
           </div>
 
-          <Dialog >
-            <DialogTrigger
-              style={{ backgroundColor: buttonBgColor, color: buttonTextColor }}
-              className="card-nav-cta-button scale-95 hover:scale-100 transition-scale duration-300 hidden md:inline-flex border-0 rounded-[calc(0.75rem-0.2rem)] px-4 items-center h-full font-medium cursor-pointer"
-            >{buttonText}</DialogTrigger>
-            <DialogContent className="main-bg">
-              <DialogTitle className='hidden' ></DialogTitle>
-              <DialogHeader>
-                <DialogDescription>
-                  <span className="text-xl font-bold py-5"> Wir freuen uns Ihre Reservationen telefonisch unter
-                    <span className="text-(--salz-color) text-3xl">&nbsp;043 477 05 04&nbsp;</span> <br /> entgegen zu nehmen.
-                    Ihr Wirtschaft zur Salzwaag Team </span>
-                </DialogDescription>
-              </DialogHeader>
-            </DialogContent>
-          </Dialog>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button
+                className="cursor-pointer text-sm"
+              >
+                Deutsch
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuGroup>
+                <DropdownMenuItem>Deutsch</DropdownMenuItem>
+                <DropdownMenuItem>Englisch</DropdownMenuItem>
+                <DropdownMenuItem>Italienisch</DropdownMenuItem>
+              </DropdownMenuGroup>
+            </DropdownMenuContent>
+          </DropdownMenu>
+
         </div>
 
         <div
