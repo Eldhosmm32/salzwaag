@@ -1,10 +1,10 @@
 import { gsap } from 'gsap';
 import React, { useLayoutEffect, useRef, useState } from 'react';
 // use your own icon import if react-icons is not available
+import Link from 'next/link';
 import { GoArrowUpRight } from 'react-icons/go';
 import { Button } from './ui/button';
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from './ui/dialog';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from './ui/dropdown-menu';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuTrigger } from './ui/dropdown-menu';
 
 type CardNavLink = {
   label: string;
@@ -190,7 +190,9 @@ const CardNav: React.FC<CardNavProps> = ({
           </div>
 
           <div className="logo-container flex items-center md:absolute md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2 order-1 md:order-none">
-            <img src={logo} alt={logoAlt} className="logo h-[45px]" />
+            <Link href="/">
+              <img src={logo} alt={logoAlt} className="logo h-[45px]" />
+            </Link>
           </div>
 
           <DropdownMenu>
@@ -224,7 +226,7 @@ const CardNav: React.FC<CardNavProps> = ({
               ref={setCardRef(idx)}
               style={{ backgroundColor: item.bgColor, color: item.textColor }}
             >
-              <div className="nav-card-label min-h-[66px] font-normal tracking-[-0.5px] text-[18px] md:text-[22px]">
+              <div className="nav-card-label font-normal tracking-[-0.5px] text-[18px] md:text-[22px]">
                 {item.label}
               </div>
               <div className="nav-card-links flex flex-col gap-[2px] border-t border-white/20 pt-3">

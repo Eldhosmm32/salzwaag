@@ -1,10 +1,15 @@
 "use client"
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { motion } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import { redirect } from "next/navigation";
 import { Suspense, useState } from "react";
+import { RESTAURANTS, getRestoSlugById } from "@/lib/restaurants";
+
+const menuTween = { type: "tween" as const, duration: 0.4, ease: "easeOut" as const };
+const menuStagger = 0.05;
 
 type MenuItem =
     | {
@@ -32,29 +37,6 @@ type MenuSection = {
 
 type MenuData = MenuSection[];
 
-const RestaurantItems = [
-    {
-        id: 0,
-        image: '/images/rest-1.jpg',
-        title: "Restaurant Stäfa",
-        location: "Stäfa, Switzerland",
-        mob: "043 477 05 04"
-    },
-    {
-        id: 1,
-        image: '/images/rest-2.jpg',
-        title: "Badi Uetikon am See",
-        location: "Uetikon am See, Switzerland",
-        mob: "044 920 22 33"
-    },
-    {
-        id: 2,
-        image: '/images/rest-3.jpg',
-        title: "Bistro Schiffsteg Stäfa",
-        location: "Stäfa, Switzerland",
-        mob: "043 818 05 00"
-    },
-];
 
 const menuDataBadi: MenuData = [
     {
@@ -358,11 +340,7 @@ const OpeningHours: any = {
     ]
 }
 
-const MenuPageContent = () => {
-    const searchParams = useSearchParams();
-    const restoId = Number(searchParams.get("restoId"));
-    const safeRestoId =
-        Number.isNaN(restoId) || restoId < 0 || restoId >= RestaurantItems.length ? 0 : restoId;
+export function MenuPageInner({ safeRestoId }: { safeRestoId: number }) {
 
     const [menuDialogOpen, setMenuDialogOpen] = useState(false);
     const [selectedMenuItem, setSelectedMenuItem] = useState<MenuItem | null>(null);
@@ -378,40 +356,75 @@ const MenuPageContent = () => {
     };
 
     return (
-        <div className="flex flex-col gap-2 w-full h-screen">
+        <motion.div
+            className="flex flex-col gap-2 w-full h-screen"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.35 }}
+        >
 
-            <div className="flex flex-col gap-2 w-full h-50 p-2 relative">
+            <motion.div
+                className="flex flex-col gap-2 w-full h-50 p-2 relative"
+                initial={{ opacity: 0, y: -12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ ...menuTween, delay: 0.1 }}
+            >
 
                 <div className=" z-10 flex justify-start items-center gap-2 w-fit p-2 bg-white/35 rounded-full overflow-hidden backdrop-blur-md">
-                    <Link href="/" className="flex items-center justify-center gap-1 rounded-full bg-gray-100 w-10 h-10">
+                    <Link href={`/${getRestoSlugById(safeRestoId)}`} className="flex items-center justify-center gap-1 rounded-full bg-gray-100 w-10 h-10">
                         <Image src="/icons/back.png" alt="Back" width={20} height={20} />
                     </Link>
                     <div className="flex flex-col gap-0">
-                        <h3 className="text-lg font-semibold">{RestaurantItems[safeRestoId].title}</h3>
-                        <p className="text-xs ">{RestaurantItems[safeRestoId].location}</p>
+                        <h3 className="text-lg font-semibold">{RESTAURANTS[safeRestoId].title}</h3>
+                        <p className="text-xs ">{RESTAURANTS[safeRestoId].location}</p>
                     </div>
                 </div>
-                <Image src={RestaurantItems[safeRestoId].image} alt="Menu" fill className="object-cover brightness-75 rounded-b-lg overflow-hidden" />
-                <div className="flex flex-col gap-2 w-full z-10 absolute bottom-0 left-0 p-4 text-white  rounded-b-md">
+                <Image src={RESTAURANTS[safeRestoId].image} alt="Menu" fill className="object-cover brightness-75 rounded-b-lg overflow-hidden" />
+                <motion.div
+                    className="flex flex-col gap-2 w-full z-10 absolute bottom-0 left-0 p-4 text-white  rounded-b-md"
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ ...menuTween, delay: 0.25 }}
+                >
                     <h3 className="text-3xl font-bold">Menu</h3>
-                </div>
-            </div>
+                </motion.div>
+            </motion.div>
 
             <div className="flex flex-col gap-2 h-[calc(100vh-10rem)] pb-40 overflow-scroll">
-                {(menuDataByRestaurant[safeRestoId] ?? menuDataBadi).map((sect) => (
-                    <div key={sect.section} className="flex flex-col gap-2 ">
+                {(menuDataByRestaurant[safeRestoId] ?? menuDataBadi).map((sect, sectIndex) => (
+                    <motion.div
+                        key={sect.section}
+                        className="flex flex-col gap-2 "
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        viewport={{ once: true, margin: "-40px" }}
+                        transition={{ ...menuTween, delay: 0.05 }}
+                    >
                         <div className="w-full pt-4 pb-2 px-2">
-                            <h1 className="text-xl font-bold">{sect.section}</h1>
+                            <motion.h1
+                                className="text-xl font-bold"
+                                initial={{ opacity: 0, x: -12 }}
+                                whileInView={{ opacity: 1, x: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ ...menuTween, delay: sectIndex * 0.03 }}
+                            >
+                                {sect.section}
+                            </motion.h1>
                             {sect.description && <h4 className="text-sm text-gray-500 font-normal">{sect.description}</h4>}
                         </div>
                         {sect.items.map((item, index) => (
-                            <div
+                            <motion.div
                                 key={`${sect.section}-${index}`}
                                 role="button"
                                 tabIndex={0}
                                 onClick={() => openMenuItemDialog(item)}
                                 onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') openMenuItemDialog(item); }}
                                 className="p-2 main-bg border border-gray-200 rounded-md gap-2 flex w-full h-fit cursor-pointer active:opacity-90 touch-manipulation"
+                                initial={{ opacity: 0, x: -16 }}
+                                whileInView={{ opacity: 1, x: 0 }}
+                                viewport={{ once: true, margin: "-20px" }}
+                                transition={{ ...menuTween, delay: index * menuStagger }}
+                                whileTap={{ scale: 0.99 }}
                             >
                                 <div className="relative h-30 w-30 shrink-0">
                                     <Image src={item.image ?? '/images/def-food.png'} alt={item.name} fill className="object-cover rounded-sm" sizes="100vw" unoptimized={Boolean(item.image?.startsWith('http'))} />
@@ -433,9 +446,9 @@ const MenuPageContent = () => {
                                         )}
                                     </div>
                                 </div>
-                            </div>
+                            </motion.div>
                         ))}
-                    </div>
+                    </motion.div>
                 ))}
 
                 <Dialog open={menuDialogOpen} onOpenChange={(open) => { if (!open) closeMenuItemDialog(); }}>
@@ -480,23 +493,38 @@ const MenuPageContent = () => {
                                             <p className="text-gray-600 mt-0.5">{selectedMenuItem.cookingProcess}</p>
                                         </div>
                                     )}
-                                    <Button variant="outline" size="sm" className="w-fit mt-2" onClick={closeMenuItemDialog}>
-                                        Schliessen
-                                    </Button>
+
+                                    <div className="flex justify-end">
+                                        <Button variant="outline" size="sm" className="w-fit mt-2" onClick={closeMenuItemDialog}>
+                                            Schliessen
+                                        </Button>
+                                    </div>
                                 </div>
                             </>
                         )}
                     </DialogContent>
                 </Dialog>
 
-                <div className="p-4 main-bg border border-gray-200 shadow rounded-md">
+                <motion.div
+                    className="p-4 main-bg border border-gray-200 shadow rounded-md"
+                    initial={{ opacity: 0, y: 12 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={menuTween}
+                >
                     <div className="text-black text-sm">
                         Take-Away nach Vorbestellung
                     </div>
-                </div>
+                </motion.div>
 
 
-                <div className="p-4 rounded-md border border-gray-200 shadow text-black text-sm font-light">
+                <motion.div
+                    className="p-4 rounded-md border border-gray-200 shadow text-black text-sm font-light"
+                    initial={{ opacity: 0, y: 12 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ ...menuTween, delay: 0.05 }}
+                >
                     <span className="font-semibold">Note:</span>
                     <br />
                     <span className="text-(--salz-color)">●</span> Fleisch und Fisch Herkunft Schweiz
@@ -507,10 +535,16 @@ const MenuPageContent = () => {
                     <br />
                     <span className="text-(--salz-color)">●</span> Für Informationen zu Allergenen wenden Sie sich bitte
                     an unser Personal.
-                </div>
+                </motion.div>
 
 
-                <div className="p-4 border border-gray-200 rounded-md shadow flex flex-col gap-3">
+                <motion.div
+                    className="p-4 border border-gray-200 rounded-md shadow flex flex-col gap-3"
+                    initial={{ opacity: 0, y: 12 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ ...menuTween, delay: 0.1 }}
+                >
                     <div className="text-black ">
                         <span className="text-md font-light text-md">Hat es Ihnen geschmeckt?</span>
                         <br /><span className="text-black">
@@ -519,25 +553,32 @@ const MenuPageContent = () => {
                     </div>
 
                     <Button className="salz-btn w-fit h-9!">Feedback bei Google</Button>
-                </div>
+                </motion.div>
             </div>
 
-            <div className="w-full p-5 fixed bottom-0 left-0">
+            <motion.div
+                className="w-full p-5 fixed bottom-0 left-0"
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ ...menuTween, delay: 0.4 }}
+            >
                 <Dialog>
+                    <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
                     <DialogTrigger className="text-lg font-bold h-fit p-2 w-full bg-amber-200 rounded-full border-4  border-amber-100 shadow-lg text-center">Reservationen & Take-Away</DialogTrigger>
+                    </motion.div>
                     <DialogContent className="main-bg">
                         <DialogHeader>
                             <DialogTitle className="hidden"></DialogTitle>
                             <DialogDescription>
                                 <span className="text-lg font-bold py-5"> Wir freuen uns Ihre Reservationen telefonisch unter
-                                    <span className="text-(--salz-color) text-xl">&nbsp;{RestaurantItems[safeRestoId].mob}&nbsp;</span> <br /> entgegen zu nehmen.
+                                    <span className="text-(--salz-color) text-xl">&nbsp;{RESTAURANTS[safeRestoId].mob}&nbsp;</span> <br /> entgegen zu nehmen.
                                     Ihr Wirtschaft zur Salzwaag Team </span>
                             </DialogDescription>
                         </DialogHeader>
                     </DialogContent>
                 </Dialog>
-            </div>
-        </div>
+            </motion.div>
+        </motion.div>
     )
 }
 
@@ -551,9 +592,5 @@ function MenuPageFallback() {
 }
 
 export default function MenuPage() {
-    return (
-        <Suspense fallback={<MenuPageFallback />}>
-            <MenuPageContent />
-        </Suspense>
-    )
+    redirect("/menu/restaurant-stafa");
 }

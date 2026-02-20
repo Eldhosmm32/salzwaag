@@ -15,29 +15,201 @@ const navItems: NavItem[] = [
     {
         label: 'Restaurant Stäfa',
         children: [
-            { href: '/restaurant-stafa/menu', label: 'Menu Restaurant' },
-            { href: '/restaurant-stafa/reservation', label: 'Reservation' },
-            { href: '/restaurant-stafa/oeffnungszeiten', label: 'Öffnungszeiten Restaurant' },
+            { href: '/menu/restaurant-stafa', label: 'Menu Restaurant' },
+            { href: '/reservation', label: 'Reservation' },
+            { href: '/restaurant-stafa', label: 'Öffnungszeiten Restaurant' },
         ],
     },
     { href: '/ueber-uns', label: 'Über uns' },
     {
         label: 'Badi Uetikon am See',
         children: [
-            { href: '/badi-uetikon/essen', label: 'Essen in der Badi' },
-            { href: '/badi-uetikon/oeffnungszeiten', label: 'Öffnungszeiten Badi Uetikon' },
+            { href: '/menu/badi-uetikon-am-see', label: 'Essen in der Badi' },
+            { href: '/badi-uetikon-am-see', label: 'Öffnungszeiten Badi Uetikon' },
         ],
     },
     {
         label: 'Bistro Schiffsteg Stäfa',
         children: [
-            { href: '/bistro-schiffsteg/karte', label: 'Karte Bistro' },
-            { href: '/bistro-schiffsteg/oeffnungszeiten', label: 'Öffnungszeiten Bistro Schiffsteg Stäfa' },
+            { href: '/menu/bistro-schiffsteg-stafa', label: 'Karte Bistro' },
+            { href: '/bistro-schiffsteg-stafa', label: 'Öffnungszeiten Bistro Schiffsteg Stäfa' },
         ],
     },
     { href: '/kontakt', label: 'Kontakt' },
 ];
 
+const OpeningHours: any = {
+    0: [
+        {
+            day: 0,
+            hours: {
+                open: "8:30",
+                close: "23:30"
+            }
+        }, {
+            day: 1,
+            hours: null
+        },
+        {
+            day: 2,
+            hours: {
+                open: "8:30",
+                close: "23:30"
+            }
+        },
+        {
+            day: 3,
+            hours: {
+                open: "8:30",
+                close: "23:30"
+            }
+        },
+        {
+            day: 4,
+            hours: {
+                open: "8:30",
+                close: "23:30"
+            }
+        },
+        {
+            day: 5,
+            hours: {
+                open: "8:30",
+                close: "23:30"
+            }
+        },
+        {
+            day: 6,
+            hours: {
+                open: "8:30",
+                close: "23:30"
+            }
+        },
+
+    ],
+
+    1: [
+        {
+            day: 0,
+            hours: {
+                open: "09:00",
+                close: "19:00"
+            }
+        },
+        {
+            day: 1,
+            hours: {
+                open: "11:00",
+                close: "20:00"
+            }
+        },
+        {
+            day: 2,
+            hours: {
+                open: "10:00",
+                close: "20:00"
+            }
+        },
+        {
+            day: 3,
+            hours: {
+                open: "10:00",
+                close: "20:00"
+            }
+        },
+        {
+            day: 4,
+            hours: {
+                open: "10:00",
+                close: "20:00"
+            }
+        },
+        {
+            day: 5,
+            hours: {
+                open: "10:00",
+                close: "20:00"
+            }
+        },
+        {
+            day: 6,
+            hours: {
+                open: "10:00",
+                close: "20:00"
+            }
+        },
+
+    ],
+
+    2: [
+        {
+            day: 0,
+            hours: {
+                open: "09:00",
+                close: "23:59"
+            }
+        },
+        {
+            day: 1,
+            hours: {
+                open: "09:00",
+                close: "23:59"
+            }
+        },
+        {
+            day: 2,
+            hours: {
+                open: "09:00",
+                close: "23:59"
+            }
+        },
+        {
+            day: 3,
+            hours: {
+                open: "09:00",
+                close: "23:59"
+            }
+        },
+        {
+            day: 4,
+            hours: {
+                open: "09:00",
+                close: "23:59"
+            }
+        },
+        {
+            day: 5,
+            hours: {
+                open: "09:00",
+                close: "23:59"
+            }
+        },
+        {
+            day: 6,
+            hours: {
+                open: "09:00",
+                close: "23:59"
+            }
+        },
+
+    ]
+}
+
+const getOpenOrNot = (index: number) => {
+    const today = new Date().getDay();
+    const hours = OpeningHours[index][today]?.hours;
+    if (!hours) {
+        return "Closed";
+    }
+    let definedOpen = new Date()
+    let definedClose = new Date()
+    definedOpen.setHours(parseInt(hours?.open.split(':')[0]), parseInt(hours?.open.split(':')[1]), 0, 0);
+    definedClose.setHours(parseInt(hours?.close.split(':')[0]), parseInt(hours?.close.split(':')[1]), 0, 0);
+    if (definedClose < new Date()) {
+        return "Open at " + hours?.open;
+    }
+    return definedOpen > new Date() && definedClose < new Date() ? "Open at " + hours?.open : "Closed by " + hours?.close;
+}
 
 const items = [
     {
@@ -45,9 +217,9 @@ const items = [
         bgColor: "#09203f",
         textColor: "#fff",
         links: [
-            { label: "Menu", ariaLabel: "Menu" },
-            { label: "Reservation", ariaLabel: "Reservation" },
-            { label: "Öffnungszeiten", ariaLabel: "Öffnungszeiten" }
+            { label: "Menu", href: "/restaurant-stafa", ariaLabel: "Menu" },
+            { label: "Reservation", href: "/reservation", ariaLabel: "Reservation" },
+            { label: getOpenOrNot(0), href: "/restaurant-stafa", ariaLabel: "Öffnungszeiten" }
         ]
     },
     {
@@ -55,9 +227,9 @@ const items = [
         bgColor: "#170D27",
         textColor: "#fff",
         links: [
-            { label: "Menu", ariaLabel: "Menu" },
-            { label: "Reservation", ariaLabel: "Reservation" },
-            { label: "Öffnungszeiten", ariaLabel: "Öffnungszeiten" }
+            { label: "Menu", href: "/badi-uetikon-am-see", ariaLabel: "Menu" },
+            { label: "Reservation", href: "/reservation", ariaLabel: "Reservation" },
+            { label: getOpenOrNot(1), href: "/badi-uetikon-am-see", ariaLabel: "Öffnungszeiten" }
         ]
     },
     {
@@ -65,9 +237,9 @@ const items = [
         bgColor: "#243949",
         textColor: "#fff",
         links: [
-            { label: "Menu", ariaLabel: "Menu" },
-            { label: "Reservation", ariaLabel: "Reservation" },
-            { label: "Öffnungszeiten", ariaLabel: "Öffnungszeiten" }
+            { label: "Menu", href: "/bistro-schiffsteg-stafa", ariaLabel: "Menu" },
+            { label: "Reservation", href: "/reservation", ariaLabel: "Reservation" },
+            { label: getOpenOrNot(2), href: "/bistro-schiffsteg-stafa", ariaLabel: "Öffnungszeiten" }
         ]
     }
 ];
@@ -75,16 +247,6 @@ const items = [
 const Navbar = () => {
 
     return (
-        // <div className="flex items-center justify-center gap-2 fixed top-0 left-0 w-full h-auto p-3 z-50">
-        //     <div className="flex gap-2 bg-(--salz-color)/70 shadow-2xl p-2 rounded-full">
-        //         <Button className="rounded-full">Reservationen</Button>
-
-        //         <Image src="/wzs-logo.png" alt="Chef" width={100} height={100} className="object-cover" />
-
-        //         <Button className="rounded-full" variant="ghost">Menü</Button>
-        //     </div>
-        // </div>
-
         <CardNav
             logo={"/wzs-logo.png"}
             logoAlt="Company Logo"

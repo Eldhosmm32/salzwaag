@@ -62,7 +62,9 @@ const Maps = ({ Id, Width, Height }: { Id: number, Width?: any, Height?: any }) 
             )}
             <div className="absolute bottom-0 left-0 w-full h-auto">
                 <div className="bg-black/15 carousel-text-section px-4 py-2">
-                    <h3 className="text-white text-lg font-bold">Call: {getMapMob(Id)}</h3>
+                    <h3 className="text-white text-lg font-bold">Call:&nbsp;
+                        <a href={`tel:${getMapMob(Id)}`} className="hover:underline">{getMapMob(Id)}</a>
+                    </h3>
                 </div>
             </div>
         </>

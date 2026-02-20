@@ -1,34 +1,29 @@
 "use client"
 
+import Footer from "@/components/Footer";
 import Maps from "@/components/Maps";
 import Navbar from "@/components/Navbar";
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
+import { motion } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { RESTAURANTS } from "@/lib/restaurants";
 
-const CarouselItems = [
-    {
-        id: 0,
-        image: '/images/rest-1.jpg',
-        title: "Restaurant Stäfa",
-        location: "Stäfa"
-    },
-    {
-        id: 1,
-        image: '/images/rest-2.jpg',
-        title: "Badi Uetikon am See",
-        location: "Uetikon am See"
-    },
-    {
-        id: 2,
-        image: '/images/rest-3.jpg',
-        title: "Bistro Schiffsteg Stäfa",
-        location: "Stäfa"
-    },
+const fadeUp = { opacity: 0, y: 24 };
+const fadeUpEnd = { opacity: 1, y: 0 };
+const fadeIn = { opacity: 0 };
+const fadeInEnd = { opacity: 1 };
+const tween = { type: "tween" as const, duration: 0.5, ease: "easeOut" as const };
+const stagger = 0.08;
 
-];
+const CarouselItems = RESTAURANTS.map((r) => ({
+    id: r.id,
+    image: r.image,
+    title: r.title,
+    location: r.location.split(",")[0] ?? r.location,
+}));
 
 const MenuItems = [
     {
@@ -264,19 +259,36 @@ const HomePage = () => {
                 </div>
 
                 <div className="w-full flex flex-col items-center justify-center h-screen z-10 relative">
-                    <Image src="/images/saal.webp" alt="Chef" fill className="object-cover z-0 brightness-75" sizes="100vw" />
+                    <motion.div
+                        className="absolute inset-0 z-0"
+                        initial={{ scale: 1.05 }}
+                        animate={isMounted ? { scale: 1 } : { scale: 1.05 }}
+                        transition={{ duration: 1.2, ease: "easeOut" }}
+                    >
+                        <Image src="/images/saal.webp" alt="Chef" fill className="object-cover brightness-75" sizes="100vw" />
+                    </motion.div>
 
                     <div className="flex flex-col gap-8 justify-center h-[calc(100vh-12rem)] z-10 absolute top-35 left-0 w-full p-10">
 
                         <div className="w-6xl mx-auto">
-                            <div className=" text-white rounded-xl flex flex-col items-center justify-center gap-3 px-2 py-4">
+                            <motion.div
+                                className=" text-white rounded-xl flex flex-col items-center justify-center gap-3 px-2 py-4"
+                                initial={fadeUp}
+                                animate={isMounted ? fadeUpEnd : fadeUp}
+                                transition={{ ...tween, delay: 0.15 }}
+                            >
                                 <div className="w-full flex gap-2">
                                     <h1 className="text-5xl font-bold ">Welcome to <span className="text-(--salz-color)">Salzwaag</span></h1>
                                 </div>
-                                <div className="w-full">
+                                <motion.div
+                                    className="w-full"
+                                    initial={fadeUp}
+                                    animate={isMounted ? fadeUpEnd : fadeUp}
+                                    transition={{ ...tween, delay: 0.3 }}
+                                >
                                     <h3 className="text-xl font-normal">Den Alltag mit einem exotischen Sinnesrausch aufpeppen oder wohliges Heimatgefühl mit Schweizer Leibspeisen geniessen - im Restaurant, auf Ihrem Event oder bei Ihnen zu Hause.</h3>
-                                </div>
-                            </div>
+                                </motion.div>
+                            </motion.div>
                         </div>
 
                         <Carousel className="w-6xl mx-auto h-full" opts={
@@ -293,26 +305,32 @@ const HomePage = () => {
                             <CarouselContent>
                                 {CarouselItems.map((item, index) => (
                                     <CarouselItem key={index} className="basis-1/2 lg:basis-1/3 resto-carousel-section">
-                                        <Link href={`/resto?restoId=${index}`}>
-                                            <div className="relative h-75 rounded-2xl overflow-hidden  ">
-                                                <Image src={item.image} alt="Food" fill className="object-cover" sizes="100vw" />
-                                                <div className="absolute bottom-0 left-0 w-full h-auto p-2">
-                                                    <div className="bg-black/15 carousel-text-section rounded-2xl px-4 py-2">
-                                                        <h3 className="text-white text-2xl font-bold">{item.title}</h3>
-                                                        <h5 className="text-white text-md font-normal">{item.location}</h5>
+                                        <motion.div
+                                            initial={{ opacity: 0, y: 20 }}
+                                            animate={isMounted ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                                            transition={{ ...tween, delay: 0.4 + index * stagger }}
+                                        >
+                                            <Link href={`/${RESTAURANTS[index].slug}`}>
+                                                <div className="relative h-75 rounded-2xl overflow-hidden  ">
+                                                    <Image src={item.image} alt="Food" fill className="object-cover" sizes="100vw" />
+                                                    <div className="absolute bottom-0 left-0 w-full h-auto p-2">
+                                                        <div className="bg-black/15 carousel-text-section rounded-2xl px-4 py-2">
+                                                            <h3 className="text-white text-2xl font-bold">{item.title}</h3>
+                                                            <h5 className="text-white text-md font-normal">{item.location}</h5>
+                                                        </div>
+                                                    </div>
+
+                                                    <div className="arrow-section absolute right-2 top-2 w-10 h-10 p-2 rounded-full bg-black/15 backdrop-blur-xs flex align-center justify-center">
+
+                                                        <Image src={'/icons/arrow-right.svg'} alt="Food" width={18} height={18} sizes="100vw" />
+                                                    </div>
+
+                                                    <div className="carousel-text-section absolute left-2 top-2 w-fit h-fit text-sm p-2 rounded-3xl bg-black/25 ">
+                                                        {getOpenOrNot(index)}
                                                     </div>
                                                 </div>
-
-                                                <div className="arrow-section absolute right-2 top-2 w-10 h-10 p-2 rounded-full bg-black/15 backdrop-blur-xs flex align-center justify-center">
-
-                                                    <Image src={'/icons/arrow-right.svg'} alt="Food" width={18} height={18} sizes="100vw" />
-                                                </div>
-
-                                                <div className="carousel-text-section absolute left-2 top-2 w-fit h-fit text-sm p-2 rounded-3xl bg-black/25 ">
-                                                    {getOpenOrNot(index)}
-                                                </div>
-                                            </div>
-                                        </Link>
+                                            </Link>
+                                        </motion.div>
                                     </CarouselItem>
                                 ))}
                             </CarouselContent>
@@ -322,19 +340,45 @@ const HomePage = () => {
 
                 {/* Hosts */}
 
-                <div className="w-full flex flex-col justify-center h-screen z-10">
+                <motion.div
+                    className="w-full flex flex-col justify-center h-screen z-10"
+                    initial={fadeIn}
+                    whileInView={fadeInEnd}
+                    viewport={{ once: true, margin: "-80px" }}
+                    transition={{ ...tween, duration: 0.6 }}
+                >
                     <div className="w-6xl mx-auto py-5">
-                        <h1 className="text-5xl font-bold text-(--salz-color) py-5">Our Hosts</h1>
+                        <motion.h1
+                            className="text-5xl font-bold text-(--salz-color) py-5"
+                            initial={{ opacity: 0, x: -20 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ ...tween, delay: 0.1 }}
+                        >
+                            Our Hosts
+                        </motion.h1>
                         <div className="w-full flex items-center gap-8">
-                            <div className="w-1/2 relative h-120 rounded-2xl overflow-hidden">
+                            <motion.div
+                                className="w-1/2 relative h-120 rounded-2xl overflow-hidden"
+                                initial={{ opacity: 0, x: -30 }}
+                                whileInView={{ opacity: 1, x: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ ...tween, delay: 0.2 }}
+                            >
                                 <Image src="/images/chef.jpg" fill className="object-cover hover:scale-105 transition-all duration-300" alt="Chef" sizes="100vw" />
                                 <div className="absolute bottom-0 right-0 w-fit h-auto p-2">
                                     <div className="bg-black/15 carousel-text-section rounded-2xl px-4 py-2">
                                         <h3 className="text-white text-2xl font-bold">{'Rosanna Artico &'} <br /> {'Koki Sivapatham'}</h3>
                                     </div>
                                 </div>
-                            </div>
-                            <div className="w-1/2 flex flex-col gap-6">
+                            </motion.div>
+                            <motion.div
+                                className="w-1/2 flex flex-col gap-6"
+                                initial={{ opacity: 0, x: 30 }}
+                                whileInView={{ opacity: 1, x: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ ...tween, delay: 0.25 }}
+                            >
 
                                 <div className="flex flex-col">
                                     <h1 className="text-3xl font-bold text-(--salz-color)">Hosts with heart and soul</h1>
@@ -359,19 +403,40 @@ const HomePage = () => {
                                     </p>
                                 </div>
 
-                            </div>
+                            </motion.div>
                         </div>
                     </div>
-                </div>
+                </motion.div>
 
                 {/* Specials */}
 
-                <div className="w-full flex flex-col justify-center min-h-screen z-10">
+                <motion.div
+                    className="w-full flex flex-col justify-center min-h-screen z-10"
+                    initial={fadeIn}
+                    whileInView={fadeInEnd}
+                    viewport={{ once: true, margin: "-80px" }}
+                    transition={{ ...tween, duration: 0.6 }}
+                >
                     <div className="w-6xl mx-auto py-5">
-                        <h1 className="text-5xl font-bold text-(--salz-color) py-5">Our Specials</h1>
+                        <motion.h1
+                            className="text-5xl font-bold text-(--salz-color) py-5"
+                            initial={{ opacity: 0, y: 16 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={tween}
+                        >
+                            Our Specials
+                        </motion.h1>
                         <div className="grid grid-cols-3 gap-10">
                             {MenuItems.map((item, index) => (
-                                <div key={index} className={`p-2 cursor-pointer bg-white border-3 h-50 border-gray-200 rounded-md overflow-hidden gap-2 flex w-full relative hover:border-(--salz-color)/80 hover:scale-102 transition-all duration-300 group`}>
+                                <motion.div
+                                    key={index}
+                                    className={`p-2 cursor-pointer bg-white border-3 h-50 border-gray-200 rounded-md overflow-hidden gap-2 flex w-full relative hover:border-(--salz-color)/80 hover:scale-102 transition-all duration-300 group`}
+                                    initial={{ opacity: 0, y: 24 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true, margin: "-24px" }}
+                                    transition={{ ...tween, delay: index * stagger }}
+                                >
                                     <Image src={item.image} alt="Reservation" fill className="object-cover brightness-90 group-hover:brightness-100 transition-all duration-300" sizes="100vw" />
                                     <div className="w-full pt-2 overflow-hidden text-black flex flex-col gap-1 absolute bottom-0 left-0 p-2 bg-white/30 group-hover:bg-white/80 transition-all duration-300 backdrop-blur-xs">
                                         <h3 className="text-lg font-semibold whitespace-nowrap text-ellipsis overflow-hidden ">{item.title}</h3>
@@ -384,60 +449,53 @@ const HomePage = () => {
                                     <div className="absolute top-2 right-2 p-2 bg-white/50 group-hover:bg-white transition-all duration-300 text-(--salz-color) font-bold backdrop-blur-xs rounded-md">
                                         <h4 className="text-sm text-normal whitespace-nowrap text-ellipsis overflow-hidden ">{item.price}</h4>
                                     </div>
-                                </div>
+                                </motion.div>
                             ))}
                         </div>
                     </div>
-                </div>
+                </motion.div>
 
 
                 {/* About Us */}
 
-                <div className="w-full flex gap-4 flex-col  z-10 relative p-5 footer-bg">
+                <motion.div
+                    className="w-full flex gap-4 flex-col  z-10 relative"
+                    initial={fadeIn}
+                    whileInView={fadeInEnd}
+                    viewport={{ once: true, margin: "-60px" }}
+                    transition={{ ...tween, duration: 0.5 }}
+                >
 
                     <div className="w-6xl mx-auto py-5 bg-white rounded-md z-10 ">
-                        <h1 className="text-4xl font-bold text-(--salz-color)">Contact Us</h1>
+                        <motion.h1
+                            className="text-4xl font-bold text-(--salz-color)"
+                            initial={{ opacity: 0, y: 12 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={tween}
+                        >
+                            Contact Us
+                        </motion.h1>
                         <h1 className="text-md font-normal text-black italic">Culinary delights at three locations</h1>
 
                         <div className="flex gap-4 justify-around p-5 pt-5">
-                            <div className="w-1/3 h-70 rounded-md overflow-hidden bg-muted relative">
-                                <Maps Id={0}></Maps>
-                            </div>
-
-                            <div className="w-1/3 h-70 rounded-md overflow-hidden bg-muted relative">
-                                <Maps Id={1}></Maps>
-                            </div>
-
-                            <div className="w-1/3 h-70 rounded-md overflow-hidden bg-muted relative">
-                                <Maps Id={1}></Maps>
-                            </div>
+                            {[0, 1, 2].map((id, i) => (
+                                <motion.div
+                                    key={id}
+                                    className="w-1/3 h-70 rounded-md overflow-hidden bg-muted relative"
+                                    initial={{ opacity: 0, y: 16 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ ...tween, delay: i * 0.1 }}
+                                >
+                                    <Maps Id={id}></Maps>
+                                </motion.div>
+                            ))}
                         </div>
-
-                        {/* Footer */}
-
-                        <footer className="flex flex-col gap-4">
-                            <div className="flex flex-col gap-4 items-center justify-center border-b border-border py-5 px-15">
-                                <Link href="/" className="text-2xl font-bold text-(--salz-color) hover:opacity-90 transition-opacity">
-                                    <Image
-                                        src={'/wzs-logo.png'}
-                                        alt="Logo"
-                                        width={200}
-                                        height={200}
-                                        className="object-contain z-10"
-                                    />
-                                </Link>
-                                <p className="text-sm text-center text-muted-foreground">
-                                    Den Alltag mit einem exotischen Sinnesrausch aufpeppen oder wohliges Heimatgefühl mit Schweizer Leibspeisen geniessen - im Restaurant, auf Ihrem Event oder bei Ihnen zu Hause.
-                                </p>
-                            </div>
-
-                            <div className="text-center w-full justify-between gap-4 text-sm text-muted-foreground">
-                                <span>© {new Date().getFullYear()} Salzwaag. All rights reserved.</span>
-                            </div>
-                        </footer>
                     </div>
-
-                </div>
+                    {/* Footer */}
+                    <Footer />
+                </motion.div>
 
             </div >
 
@@ -484,7 +542,7 @@ const HomePage = () => {
                                 <Link href="/reservation">Reservationen</Link>
                             </Button>
                             <Button className="salz-btn" asChild>
-                                <Link href="/menu">Menu</Link>
+                                <Link href="/menu/restaurant-stafa">Menu</Link>
                             </Button>
                         </div>
 
@@ -493,35 +551,53 @@ const HomePage = () => {
                 </div>
             </div > */}
 
-            <div className="flex md:hidden flex-col items-center min-h-screen w-full relative overflow-auto pt-4 main-bg">
-                <Image
-                    src={'/wzs-logo.png'}
-                    alt="Logo"
-                    width={150}
-                    height={150}
-                />
+            <motion.div
+                className="flex md:hidden flex-col items-center min-h-screen w-full relative overflow-auto pt-4 main-bg"
+                initial={fadeIn}
+                animate={fadeInEnd}
+                transition={{ duration: 0.4 }}
+            >
+                <motion.div
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={isMounted ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}
+                    transition={{ ...tween, delay: 0.1 }}
+                >
+                    <Image
+                        src={'/wzs-logo.png'}
+                        alt="Logo"
+                        width={150}
+                        height={150}
+                    />
+                </motion.div>
                 <div className="flex flex-col gap-4 w-full pt-8 px-4 pb-8">
                     {CarouselItems.map((item, index) => (
-                        <Link key={index} href={`/menu?restoId=${index}`} className="block w-full">
-                            <div className="relative h-75 rounded-2xl overflow-hidden w-full">
-                                <Image src={item.image} alt={item.title} fill className="object-cover" sizes="100vw" />
-                                <div className="absolute bottom-0 left-0 w-full h-auto p-2">
-                                    <div className="bg-black/15 carousel-text-section rounded-2xl px-4 py-2">
-                                        <h3 className="text-white text-2xl font-bold">{item.title}</h3>
-                                        <h5 className="text-white text-md font-normal">{item.location}</h5>
+                        <motion.div
+                            key={index}
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={isMounted ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                            transition={{ ...tween, delay: 0.2 + index * 0.1 }}
+                        >
+                            <Link href={`/menu/${RESTAURANTS[index].slug}`} className="block w-full">
+                                <div className="relative h-75 rounded-2xl overflow-hidden w-full">
+                                    <Image src={item.image} alt={item.title} fill className="object-cover" sizes="100vw" />
+                                    <div className="absolute bottom-0 left-0 w-full h-auto p-2">
+                                        <div className="bg-black/15 carousel-text-section rounded-2xl px-4 py-2">
+                                            <h3 className="text-white text-2xl font-bold">{item.title}</h3>
+                                            <h5 className="text-white text-md font-normal">{item.location}</h5>
+                                        </div>
+                                    </div>
+                                    <div className="arrow-section absolute right-2 top-2 w-10 h-10 p-2 rounded-full bg-black/15 backdrop-blur-xs flex items-center justify-center">
+                                        <Image src="/icons/arrow-right.svg" alt="Arrow" width={18} height={18} sizes="100vw" />
+                                    </div>
+                                    <div className="carousel-text-section absolute left-2 top-2 w-fit h-fit text-sm p-2 rounded-3xl bg-black/25 text-white">
+                                        {getOpenOrNot(index)}
                                     </div>
                                 </div>
-                                <div className="arrow-section absolute right-2 top-2 w-10 h-10 p-2 rounded-full bg-black/15 backdrop-blur-xs flex items-center justify-center">
-                                    <Image src="/icons/arrow-right.svg" alt="Arrow" width={18} height={18} sizes="100vw" />
-                                </div>
-                                <div className="carousel-text-section absolute left-2 top-2 w-fit h-fit text-sm p-2 rounded-3xl bg-black/25 text-white">
-                                    Open Now
-                                </div>
-                            </div>
-                        </Link>
+                            </Link>
+                        </motion.div>
                     ))}
                 </div>
-            </div>
+            </motion.div>
         </>
     );
 };

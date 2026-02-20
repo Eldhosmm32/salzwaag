@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Table, TableRow, TableBody, TableCell } from "@/components/ui/table";
 import Link from "next/link";
 import React, { useEffect } from "react";
+import { getRestoSlugById } from "@/lib/restaurants";
 
 type MenuItem =
     | {
@@ -387,7 +388,7 @@ const ReservationPage = ({ restoId }: { restoId: number }) => {
                             </CarouselContent>
                         </Carousel>
                         <Button className="border border-orange-400 w-full" variant="outline">
-                            <Link href={`./menu?restoId=${restoId}`}> View All</Link>
+                            <Link href={`/menu/${getRestoSlugById(restoId)}`}> View All</Link>
                         </Button>
                     </div>
                 </div>
@@ -413,7 +414,7 @@ const ReservationPage = ({ restoId }: { restoId: number }) => {
             <div className="w-full p-5 fixed bottom-0 left-0">
                 <div className="flex justify-between gap-2 bg-amber-200/10 rounded-full p-2 backdrop-blur-lg border-3 ">
                     <div className="flex flex-col gap-0.5 pl-2 w-1/2">
-                        <p className="font-semibold text-ellipsis overflow-hidden w-full whitespace-nowrap">{RestaurantItems[restoId].title}</p>
+                        <Link href={`/${getRestoSlugById(restoId)}`} className="font-semibold text-ellipsis overflow-hidden w-full whitespace-nowrap hover:underline">{RestaurantItems[restoId].title}</Link>
                         <p className="text-sm text-muted-foreground text-ellipsis overflow-hidden w-full whitespace-nowrap">{RestaurantItems[restoId].location}</p>
                     </div>
                     <h3 className="text-lg font-bold h-fit p-2 w-1/2 bg-amber-200 rounded-full text-center">Reservationen</h3>
