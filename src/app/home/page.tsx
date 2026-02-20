@@ -268,9 +268,9 @@ const HomePage = () => {
                         <Image src="/images/saal.webp" alt="Chef" fill className="object-cover brightness-75" sizes="100vw" />
                     </motion.div>
 
-                    <div className="flex flex-col gap-8 justify-center h-[calc(100vh-12rem)] z-10 absolute top-35 left-0 w-full p-10">
+                    <div className="flex flex-col gap-6 md:gap-8 justify-center h-[calc(100vh-12rem)] z-10 absolute top-35 left-0 w-full p-4 md:p-6 lg:p-10">
 
-                        <div className="w-6xl mx-auto">
+                        <div className="w-full max-w-full md:max-w-4xl lg:max-w-6xl mx-auto px-2">
                             <motion.div
                                 className=" text-white rounded-xl flex flex-col items-center justify-center gap-3 px-2 py-4"
                                 initial={fadeUp}
@@ -278,7 +278,7 @@ const HomePage = () => {
                                 transition={{ ...tween, delay: 0.15 }}
                             >
                                 <div className="w-full flex gap-2">
-                                    <h1 className="text-5xl font-bold ">Welcome to <span className="text-(--salz-color)">Salzwaag</span></h1>
+                                    <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold ">Willkommen bei <span className="text-(--salz-color)">Salzwaag</span></h1>
                                 </div>
                                 <motion.div
                                     className="w-full"
@@ -286,12 +286,12 @@ const HomePage = () => {
                                     animate={isMounted ? fadeUpEnd : fadeUp}
                                     transition={{ ...tween, delay: 0.3 }}
                                 >
-                                    <h3 className="text-xl font-normal">Den Alltag mit einem exotischen Sinnesrausch aufpeppen oder wohliges Heimatgefühl mit Schweizer Leibspeisen geniessen - im Restaurant, auf Ihrem Event oder bei Ihnen zu Hause.</h3>
+                                    <h3 className="text-base md:text-lg lg:text-xl font-normal">Den Alltag mit einem exotischen Sinnesrausch aufpeppen oder wohliges Heimatgefühl mit Schweizer Leibspeisen geniessen - im Restaurant, auf Ihrem Event oder bei Ihnen zu Hause.</h3>
                                 </motion.div>
                             </motion.div>
                         </div>
 
-                        <Carousel className="w-6xl mx-auto h-full" opts={
+                        <Carousel className="w-full max-w-full md:max-w-4xl lg:max-w-6xl mx-auto h-full px-2" opts={
                             {
                                 loop: true,
                                 duration: 50,
@@ -311,12 +311,12 @@ const HomePage = () => {
                                             transition={{ ...tween, delay: 0.4 + index * stagger }}
                                         >
                                             <Link href={`/${RESTAURANTS[index].slug}`}>
-                                                <div className="relative h-75 rounded-2xl overflow-hidden  ">
+                                                <div className="relative h-56 md:h-64 lg:h-75 rounded-lg overflow-hidden  ">
                                                     <Image src={item.image} alt="Food" fill className="object-cover" sizes="100vw" />
                                                     <div className="absolute bottom-0 left-0 w-full h-auto p-2">
-                                                        <div className="bg-black/15 carousel-text-section rounded-2xl px-4 py-2">
-                                                            <h3 className="text-white text-2xl font-bold">{item.title}</h3>
-                                                            <h5 className="text-white text-md font-normal">{item.location}</h5>
+                                                        <div className="bg-black/15 carousel-text-section rounded-2xl px-3 md:px-4 py-2">
+                                                            <h3 className="text-white text-lg md:text-xl lg:text-2xl font-bold">{item.title}</h3>
+                                                            <h5 className="text-white text-sm md:text-md font-normal">{item.location}</h5>
                                                         </div>
                                                     </div>
 
@@ -341,25 +341,25 @@ const HomePage = () => {
                 {/* Hosts */}
 
                 <motion.div
-                    className="w-full flex flex-col justify-center h-screen z-10"
+                    className="w-full flex flex-col justify-center min-h-screen md:h-screen z-10"
                     initial={fadeIn}
                     whileInView={fadeInEnd}
                     viewport={{ once: true, margin: "-80px" }}
                     transition={{ ...tween, duration: 0.6 }}
                 >
-                    <div className="w-6xl mx-auto py-5">
+                    <div className="w-full max-w-full md:max-w-4xl lg:max-w-6xl mx-auto py-5 px-4 md:px-6 lg:px-0">
                         <motion.h1
-                            className="text-5xl font-bold text-(--salz-color) py-5"
+                            className="text-3xl md:text-4xl lg:text-5xl font-bold text-(--salz-color) py-4 md:py-5"
                             initial={{ opacity: 0, x: -20 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
                             transition={{ ...tween, delay: 0.1 }}
                         >
-                            Our Hosts
+                            Unsere Gastgeber
                         </motion.h1>
-                        <div className="w-full flex items-center gap-8">
+                        <div className="w-full flex flex-col lg:flex-row items-stretch lg:items-center gap-6 md:gap-8">
                             <motion.div
-                                className="w-1/2 relative h-120 rounded-2xl overflow-hidden"
+                                className="w-full lg:w-1/2 relative h-72 md:h-96 lg:h-120 rounded-2xl overflow-hidden shrink-0"
                                 initial={{ opacity: 0, x: -30 }}
                                 whileInView={{ opacity: 1, x: 0 }}
                                 viewport={{ once: true }}
@@ -367,13 +367,13 @@ const HomePage = () => {
                             >
                                 <Image src="/images/chef.jpg" fill className="object-cover hover:scale-105 transition-all duration-300" alt="Chef" sizes="100vw" />
                                 <div className="absolute bottom-0 right-0 w-fit h-auto p-2">
-                                    <div className="bg-black/15 carousel-text-section rounded-2xl px-4 py-2">
-                                        <h3 className="text-white text-2xl font-bold">{'Rosanna Artico &'} <br /> {'Koki Sivapatham'}</h3>
+                                    <div className="bg-black/15 carousel-text-section rounded-2xl px-3 md:px-4 py-2">
+                                        <h3 className="text-white text-xl md:text-2xl font-bold">{'Rosanna Artico &'} <br /> {'Koki Sivapatham'}</h3>
                                     </div>
                                 </div>
                             </motion.div>
                             <motion.div
-                                className="w-1/2 flex flex-col gap-6"
+                                className="w-full lg:w-1/2 flex flex-col gap-4 md:gap-6"
                                 initial={{ opacity: 0, x: 30 }}
                                 whileInView={{ opacity: 1, x: 0 }}
                                 viewport={{ once: true }}
@@ -381,25 +381,25 @@ const HomePage = () => {
                             >
 
                                 <div className="flex flex-col">
-                                    <h1 className="text-3xl font-bold text-(--salz-color)">Hosts with heart and soul</h1>
-                                    <h1 className="text-md font-normal text-black italic">Culinary creativity for over 20 years</h1>
+                                    <h1 className="text-2xl md:text-3xl font-bold text-(--salz-color)">Gastgeber mit Leib und Seele</h1>
+                                    <h1 className="text-sm md:text-md font-normal text-black italic">Seit über 20 Jahren kulinarisch kreativ</h1>
                                 </div>
 
-                                <div className="h-[calc(100vh-18rem)] overflow-y-scroll">
-                                    <p className="text-md font-normal text-black">
-                                        Rosanna Artico and Koki Sivapatham are a well-coordinated team. The service professional with a restaurant license and experience in a wide variety of establishments, from cozy pubs to excellent gourmet restaurants, and the chef with self-taught talent and inexhaustible creativity have been going through life and work together for 20 years.
+                                <div className="h-80 md:h-112 lg:h-[calc(100vh-18rem)] overflow-y-scroll">
+                                    <p className="text-sm md:text-md font-normal text-black">
+                                        Rosanna Artico und Koki Sivapatham sind ein eingespieltes Team. Die Servicefachfrau mit Wirtepatent und Erfahrung in verschiedensten Häusern von gemütlichen Beizen bis ausgezeichneten Gourmet-Tempeln und der Koch mit autodidaktischem Talent und unerschöpflicher Kreativität gehen seit 20 Jahren privat und beruflich gemeinsam durchs Leben.
                                         <br />
                                         <br />
-                                        With the lease of Salzwaag in 2005, they realized their personal vision. No dish is served here unless the chef is personally convinced of its quality. Whether cordon bleu or satay skewers, beef fillet with herb butter or red snapper with sambal sauce – the entire menu of Malaysian specialties and Swiss classics is freshly cooked and, whenever possible, prepared with regional products.
+                                        Mit der Pacht der Salzwaag 2005 haben sie ihre persönliche Vision verwirklicht. Hier wird kein Gericht serviert, ohne dass der Küchenchef persönlich von dessen Qualität überzeugt ist. Ob Cordon bleu oder Satay-Spiess, ob Rindsfilet mit Kräuterbutter oder Red Snapper an Sambal-Sauce – das komplette Angebot aus malaysischen Spezialitäten und Schweizer Klassikern wird frisch gekocht und wenn möglich aus regionalen Produkten zubereitet.
                                         <br />
                                         <br />
-                                        Rosanna and Koki regularly update the menu, always in close collaboration. They draw inspiration from their own culinary experiences and their guests' wishes, brainstorming ideas, meticulously working on details, and developing surprising and compelling combinations. Guests' favorite dishes, however, remain untouched.
+                                        Rosanna und Koki erneuern die Speisekarte regelmässig und immer in enger Zusammenarbeit. Dazu lassen sie sich von ihren eigenen kulinarischen Erlebnissen und den Wünschen ihrer Gäste inspirieren, hecken Ideen aus, tüfteln an Details und entwickeln so überraschende und überzeugende Kombinationen. Unangetastet bleiben dabei die Lieblingsgerichte der Gäste.
                                         <br />
                                         <br />
-                                        Their needs are always the top priority. Special requests can be specified when making a reservation and are a welcome challenge for the passionate chef. So, anyone who prefers vegan, lactose-free, or gluten-free meals, or who suffers from allergies or intolerances, can look forward to a specially tailored menu.
+                                        Deren Bedürfnisse stehen immer an oberster Stelle. Sonderwünsche dürfen bei der Reservation angegeben werden und sind für den leidenschaftlichen Koch eine willkommene Herausforderung. Wer also gerne vegan, laktose- oder glutenfrei isst, an Allergien oder Unverträglichkeiten leidet, darf sich auf ein eigens angepasstes Menü freuen.
                                         <br />
                                         <br />
-                                        Rosanna has owned Salzwaag since 2017. Today, her Malaysian-Swiss culinary delights are no longer only available on the hillside in Stäfa, but also directly on Lake Zurich. At the Schiffsteg bistro in Stäfa, Rosanna serves grilled chicken as well as select Swiss and Asian dishes, and at the Uetikon lido, guests enjoy typical beach fare of a high standard and Malaysian specialties.
+                                        Seit 2017 ist Rosanna Inhaberin der Salzwaag. Heute steht der malaysisch-schweizerische Gaumenschmaus nicht mehr nur am Stäfner Hang zur Verfügung, sondern auch direkt am Zürichsee. Im Stäfner Bistro Schiffsteg serviert Rosanna Güggeli vom Grill sowie ausgewählte Schweizer und asiatische Gerichte, und in der Badi Uetikon geniessen die Gäste typische Strandbad-Speisen in gehobener Qualität und malaysische Highlights.
                                     </p>
                                 </div>
 
@@ -417,21 +417,21 @@ const HomePage = () => {
                     viewport={{ once: true, margin: "-80px" }}
                     transition={{ ...tween, duration: 0.6 }}
                 >
-                    <div className="w-6xl mx-auto py-5">
+                    <div className="w-full max-w-full md:max-w-4xl lg:max-w-6xl mx-auto py-5 px-4 md:px-6  lg:px-0">
                         <motion.h1
-                            className="text-5xl font-bold text-(--salz-color) py-5"
+                            className="text-3xl md:text-4xl lg:text-5xl font-bold text-(--salz-color) py-4 md:py-5"
                             initial={{ opacity: 0, y: 16 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={tween}
                         >
-                            Our Specials
+                            Unsere Specials
                         </motion.h1>
-                        <div className="grid grid-cols-3 gap-10">
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 lg:gap-10">
                             {MenuItems.map((item, index) => (
                                 <motion.div
                                     key={index}
-                                    className={`p-2 cursor-pointer bg-white border-3 h-50 border-gray-200 rounded-md overflow-hidden gap-2 flex w-full relative hover:border-(--salz-color)/80 hover:scale-102 transition-all duration-300 group`}
+                                    className={`p-2 cursor-pointer bg-white border-3 h-44 md:h-48 lg:h-50 border-gray-200 rounded-md overflow-hidden gap-2 flex w-full relative hover:border-(--salz-color)/80 hover:scale-102 transition-all duration-300 group`}
                                     initial={{ opacity: 0, y: 24 }}
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true, margin: "-24px" }}
@@ -439,15 +439,15 @@ const HomePage = () => {
                                 >
                                     <Image src={item.image} alt="Reservation" fill className="object-cover brightness-90 group-hover:brightness-100 transition-all duration-300" sizes="100vw" />
                                     <div className="w-full pt-2 overflow-hidden text-black flex flex-col gap-1 absolute bottom-0 left-0 p-2 bg-white/30 group-hover:bg-white/80 transition-all duration-300 backdrop-blur-xs">
-                                        <h3 className="text-lg font-semibold whitespace-nowrap text-ellipsis overflow-hidden ">{item.title}</h3>
+                                        <h3 className="text-base md:text-lg font-semibold whitespace-nowrap text-ellipsis overflow-hidden ">{item.title}</h3>
 
                                         <div className="flex gap-0.5">
-                                            <h4 className="text-md text-normal whitespace-nowrap text-ellipsis overflow-hidden ">available At: {CarouselItems[item.restaurantId].title}</h4>
+                                            <h4 className="text-sm md:text-md text-normal whitespace-nowrap text-ellipsis overflow-hidden ">available At: {CarouselItems[item.restaurantId].title}</h4>
                                         </div>
                                     </div>
 
                                     <div className="absolute top-2 right-2 p-2 bg-white/50 group-hover:bg-white transition-all duration-300 text-(--salz-color) font-bold backdrop-blur-xs rounded-md">
-                                        <h4 className="text-sm text-normal whitespace-nowrap text-ellipsis overflow-hidden ">{item.price}</h4>
+                                        <h4 className="text-xs md:text-sm text-normal whitespace-nowrap text-ellipsis overflow-hidden ">{item.price}</h4>
                                     </div>
                                 </motion.div>
                             ))}
@@ -466,23 +466,23 @@ const HomePage = () => {
                     transition={{ ...tween, duration: 0.5 }}
                 >
 
-                    <div className="w-6xl mx-auto py-5 bg-white rounded-md z-10 ">
+                    <div className="w-full max-w-full md:max-w-4xl lg:max-w-6xl mx-auto py-5 px-4 md:px-6  lg:px-0 bg-white rounded-md z-10 ">
                         <motion.h1
-                            className="text-4xl font-bold text-(--salz-color)"
+                            className="text-3xl md:text-4xl font-bold text-(--salz-color)"
                             initial={{ opacity: 0, y: 12 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={tween}
                         >
-                            Contact Us
+                            Kontaktieren Sie uns
                         </motion.h1>
-                        <h1 className="text-md font-normal text-black italic">Culinary delights at three locations</h1>
+                        <h1 className="text-sm md:text-md font-normal text-black italic">Kulinarisch verwöhnt an drei Standorten</h1>
 
-                        <div className="flex gap-4 justify-around p-5 pt-5">
+                        <div className="flex flex-col md:flex-row gap-4 justify-around p-4 md:p-5 lg:p-0 pt-4 md:pt-5 lg:pt-5">
                             {[0, 1, 2].map((id, i) => (
                                 <motion.div
                                     key={id}
-                                    className="w-1/3 h-70 rounded-md overflow-hidden bg-muted relative"
+                                    className="w-full md:w-1/3 h-56 md:h-64 lg:h-70 rounded-md overflow-hidden bg-muted relative min-h-56"
                                     initial={{ opacity: 0, y: 16 }}
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
@@ -498,58 +498,6 @@ const HomePage = () => {
                 </motion.div>
 
             </div >
-
-            {/* <div className="flex md:hidden flex-col items-center h-screen relative overflow-hidden">
-                <div className="w-full h-screen max-w-4xl mx-auto z-10 ">
-                    <MainCarousel
-                        opts={{
-                            align: 'start',
-                            containScroll: 'trimSnaps',
-                            dragFree: false,
-                            loop: true,
-                            duration: 45,
-                        }}
-                        plugins={[Autoplay({ delay: 4000, })]}
-                        className="bg-black/20 overflow-hidden"
-                    >
-                        <MainCarouselContent className="ml-0 ">
-                            {CarouselItems.map((item, index) => (
-                                <MainCarouselItem key={index} className="basis-full pl-0 ">
-                                    <div className="relative h-screen ">
-                                        <Image src={item.image} alt="Carousel" fill className="object-cover" sizes="100vw" />
-                                    </div>
-                                </MainCarouselItem>
-                            ))}
-                        </MainCarouselContent>
-                    </MainCarousel>
-                </div>
-
-                <div className="p-4 absolute bottom-20 left-0 w-full z-10 overflow-hidden">
-
-                    <div className="bg-white/20 backdrop-blur-sm p-8 rounded-md flex flex-col items-center gap-4 ">
-                        <h2 className="text-black text-2xl font-bold">Welcome to</h2>
-
-                        <Image
-                            src={'/wzs-logo.png'}
-                            alt="Logo"
-                            width={200}
-                            height={200}
-                            className="object-contain z-10"
-                        />
-
-                        <div className="flex gap-2 mt-4">
-                            <Button className="salz-btn" asChild>
-                                <Link href="/reservation">Reservationen</Link>
-                            </Button>
-                            <Button className="salz-btn" asChild>
-                                <Link href="/menu/restaurant-stafa">Menu</Link>
-                            </Button>
-                        </div>
-
-                    </div>
-
-                </div>
-            </div > */}
 
             <motion.div
                 className="flex md:hidden flex-col items-center min-h-screen w-full relative overflow-auto pt-4 main-bg"
